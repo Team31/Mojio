@@ -1,0 +1,20 @@
+//
+//  MojioClient.h
+//  mojioTesting
+//
+//  Created by Flynn Howling on 11/7/2013.
+//  Copyright (c) 2013 team31. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface MojioClient : NSObject
+
+@property (strong, nonatomic) NSString *appID, *secretKey, *apiToken;
+@property int pagesize;
+
+-(BOOL)setUserWithUsername:(NSString*)username AndPassword:(NSString*)password;
+-(NSString*)getTripData;
+
+
+@end

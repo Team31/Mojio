@@ -23,6 +23,7 @@
 		52B410951835765E003AFC3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52B410931835765E003AFC3E /* InfoPlist.strings */; };
 		52B410971835765E003AFC3E /* MojioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410961835765E003AFC3E /* MojioTests.m */; };
 		52B410A2183577BE003AFC3E /* SpeedSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410A1183577BE003AFC3E /* SpeedSelectionViewController.m */; };
+		52B410A51835818B003AFC3E /* MojioClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410A41835818B003AFC3E /* MojioClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		52B410961835765E003AFC3E /* MojioTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MojioTests.m; sourceTree = "<group>"; };
 		52B410A0183577BE003AFC3E /* SpeedSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedSelectionViewController.h; sourceTree = "<group>"; };
 		52B410A1183577BE003AFC3E /* SpeedSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedSelectionViewController.m; sourceTree = "<group>"; };
+		52B410A31835818B003AFC3E /* MojioClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioClient.h; sourceTree = "<group>"; };
+		52B410A41835818B003AFC3E /* MojioClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MojioClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 		52B4106E1835765E003AFC3E /* Mojio */ = {
 			isa = PBXGroup;
 			children = (
+				52B410A31835818B003AFC3E /* MojioClient.h */,
+				52B410A41835818B003AFC3E /* MojioClient.m */,
 				52B410771835765E003AFC3E /* AppDelegate.h */,
 				52B410781835765E003AFC3E /* AppDelegate.m */,
 				52B4107A1835765E003AFC3E /* Main_iPhone.storyboard */,
@@ -262,6 +267,7 @@
 				52B410791835765E003AFC3E /* AppDelegate.m in Sources */,
 				52B410751835765E003AFC3E /* main.m in Sources */,
 				52B410A2183577BE003AFC3E /* SpeedSelectionViewController.m in Sources */,
+				52B410A51835818B003AFC3E /* MojioClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
