@@ -7,11 +7,9 @@
 //
 
 #import "HomeViewController.h"
-#import "SpeedSelectionViewController.h"
-#import "LoginViewController.h"
-#import "ManageDevicesViewController.h"
 
 @interface HomeViewController ()
+@property (strong, nonatomic) UIStoryboard *storyBoard;
 
 @end
 
@@ -20,7 +18,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    //TODO: Check if a user is currently logged in
+    //This is just for testing with some data until we can pull it from the mojio server
+    
+    //Make test data (only for testing, remove later)
+    [self makeTestData];
+    
+    
+    //make home page title the first device nickname, if it exists
+    if (((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:0]).nickname)
+    {
+        self.navigationItem.title = ((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:0]).nickname;
+    }
+    else
+    {
+        self.navigationItem.title = @"Home";
+    }
+
+    //set the navigtion bar left and right buttons
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Devices" style:UIBarButtonItemStylePlain target:self action:@selector(manageDevicesTapped)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(loginTapped)];
+    
+    //get main storyboard, we will instantiate viewControllers from this
+    self.storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     
 }
 
@@ -31,19 +51,41 @@
 }
 
 - (IBAction)SpeedSelectionButtonPressed:(id)sender {
-    UIStoryboard *speedSelection = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    UIViewController *speedSelectionViewController = (SpeedSelectionViewController *)[speedSelection instantiateViewControllerWithIdentifier:@"SpeedSelectionViewController"];
-    [self presentViewController:speedSelectionViewController animated:true completion:^(void){}];
+    UIViewController *speedSelectionViewController = (SpeedSelectionViewController *)[self.storyBoard instantiateViewControllerWithIdentifier:@"SpeedSelectionViewController"];
+    [self.navigationController pushViewController:speedSelectionViewController animated:true];
 }
 
-- (IBAction)LoginTapped:(id)sender {
-    UIStoryboard *loginSelection = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    UIViewController *loginViewController = (LoginViewController *)[loginSelection instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    [self presentViewController:loginViewController animated:true completion:^(void){}];
+- (void)loginTapped{
+    UIViewController *loginViewController = (LoginViewController *)[self.storyBoard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [self.navigationController pushViewController:loginViewController animated:true];
 }
-- (IBAction)manageDeviceButton:(id)sender {
-    UIStoryboard *manageSelection = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    UIViewController *manageDevicesViewController = (ManageDevicesViewController *)[manageSelection instantiateViewControllerWithIdentifier:@"ManageDevicesViewController"];
-    [self presentViewController:manageDevicesViewController animated:true completion:^(void){}];
+
+- (void)manageDevicesTapped {
+    UIViewController *manageDevicesViewController = (ManageDevicesViewController *)[self.storyBoard instantiateViewControllerWithIdentifier:@"ManageDevicesViewController"];
+    [self.navigationController pushViewController:manageDevicesViewController animated:true];
+}
+
+- (void)makeTestData{
+    //make some test devices
+    Device *deviceOne = [[Device alloc] init];
+    deviceOne.speedLimit = 60;
+    deviceOne.idNumber = @"12345";
+    deviceOne.nickname = @"Red Car";
+    Device *deviceTwo = [[Device alloc] init];
+    deviceTwo.speedLimit = 70;
+    deviceTwo.idNumber = @"12345";
+    deviceTwo.nickname = @"Blue Car";
+    Device *deviceThree = [[Device alloc] init];
+    deviceThree.speedLimit = 80;
+    deviceThree.idNumber = @"12345";
+    deviceThree.nickname = @"Green Car";
+    
+    //make test user
+    User *userOne = [[User alloc] init];
+    [userOne setUsername:@"TestUserName"];
+    [userOne setDevices:[[NSArray alloc] initWithObjects:deviceOne, deviceTwo, deviceThree, nil]];
+    //start session singlton
+    [[Session sharedInstance] setCurrentUser:userOne];
+
 }
 @end

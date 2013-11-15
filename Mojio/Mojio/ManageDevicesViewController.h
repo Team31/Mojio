@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Session.h"
+#import "EditDevicesViewController.h"
 
-@interface ManageDevicesViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIButton *BackButton;
-- (IBAction)BackButton:(id)sender;
+@interface ManageDevicesViewController : UITableViewController
 
 @end

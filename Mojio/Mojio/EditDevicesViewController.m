@@ -1,18 +1,18 @@
 //
-//  ManageDevicesViewController.m
+//  EditDevicesViewController.m
 //  Mojio
 //
 //  Created by Flynn Howling on 11/14/2013.
 //  Copyright (c) 2013 team31. All rights reserved.
 //
 
-#import "ManageDevicesViewController.h"
+#import "EditDevicesViewController.h"
 
-@interface ManageDevicesViewController ()
+@interface EditDevicesViewController ()
 
 @end
 
-@implementation ManageDevicesViewController
+@implementation EditDevicesViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,6 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"Edit";
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -51,38 +53,38 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[Session sharedInstance]currentUser].devices.count;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     
     // Configure the cell...
-    cell.textLabel.text = ((Device*)[[Session sharedInstance]currentUser].devices[indexPath.row]).nickname;
+    switch (indexPath.row) {
+        case 0:
+            cell.textLabel.text = self.device.idNumber;
+            cell.detailTextLabel.text = @"ID number";
+            break;
+        case 1:
+            cell.textLabel.text = self.device.nickname;
+            cell.detailTextLabel.text = @"Nickname";
+            break;
+        default:
+            break;
+    }
     
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    EditDevicesViewController *editDevicesViewController = (EditDevicesViewController *)[storyboard instantiateViewControllerWithIdentifier:@"EditDevicesViewController"];
-    [self.navigationController pushViewController:editDevicesViewController animated:true];
-    editDevicesViewController.device = ((Device*)[[Session sharedInstance]currentUser].devices[indexPath.row]);
-    
-}
 
-/*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
+
 
 /*
 // Override to support editing the table view.

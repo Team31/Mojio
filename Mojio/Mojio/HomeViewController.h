@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SpeedSelectionViewController.h"
+#import "LoginViewController.h"
+#import "ManageDevicesViewController.h"
+#import "Session.h"
+
 
 @interface HomeViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIButton *speedSeleectionButton;
-
 - (IBAction)SpeedSelectionButtonPressed:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIButton *LoginButton;
-- (IBAction)LoginTapped:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *manageDeviceButton;
-- (IBAction)manageDeviceButton:(id)sender;
 
 @end
