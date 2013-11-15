@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "LoginViewController.h"
 
 @interface MojioTests : XCTestCase
 
@@ -27,18 +26,9 @@
     [super tearDown];
 }
 
-
-- (void)testLogin
+- (void)testExample
 {
-    LoginViewController *loginViewController = [[LoginViewController alloc] init];
-    XCTAssertEqual(loginViewController.UsernameTextField.text.length, 0U, @"Lenght does not equal 0");
-    //XCTAssertEqual(loginViewController.UsernameTextField.text.length, 1U, @"Lenght does not equal 1");
+    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
 
-- (void)test
-{
-    LoginViewController *loginViewController = [[LoginViewController alloc] init];
-    XCTAssertEqual(loginViewController.UsernameTextField.text.length, 0U, @"Lenght does not equal 0");
-    //XCTAssertEqual(loginViewController.UsernameTextField.text.length, 1U, @"Lenght does not equal 1");
-}
 @end

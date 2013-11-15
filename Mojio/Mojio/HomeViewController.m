@@ -8,8 +8,6 @@
 
 #import "HomeViewController.h"
 #import "SpeedSelectionViewController.h"
-#import "LoginViewController.h"
-#import "ManageDevicesViewController.h"
 
 @interface HomeViewController ()
 
@@ -36,14 +34,4 @@
     [self presentViewController:speedSelectionViewController animated:true completion:^(void){}];
 }
 
-- (IBAction)LoginTapped:(id)sender {
-    UIStoryboard *loginSelection = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    UIViewController *loginViewController = (LoginViewController *)[loginSelection instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    [self presentViewController:loginViewController animated:true completion:^(void){}];
-}
-- (IBAction)manageDeviceButton:(id)sender {
-    UIStoryboard *manageSelection = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    UIViewController *manageDevicesViewController = (ManageDevicesViewController *)[manageSelection instantiateViewControllerWithIdentifier:@"ManageDevicesViewController"];
-    [self presentViewController:manageDevicesViewController animated:true completion:^(void){}];
-}
 @end

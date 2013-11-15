@@ -14,9 +14,4 @@
 
 - (IBAction)SpeedSelectionButtonPressed:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIButton *LoginButton;
-- (IBAction)LoginTapped:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *manageDeviceButton;
-- (IBAction)manageDeviceButton:(id)sender;
-
 @end
