@@ -24,6 +24,8 @@
 		52B410971835765E003AFC3E /* MojioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410961835765E003AFC3E /* MojioTests.m */; };
 		52B410A2183577BE003AFC3E /* SpeedSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410A1183577BE003AFC3E /* SpeedSelectionViewController.m */; };
 		52B410A51835818B003AFC3E /* MojioClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410A41835818B003AFC3E /* MojioClient.m */; };
+		52B410A8183582DB003AFC3E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410A7183582DB003AFC3E /* LoginViewController.m */; };
+		52B410AB18358C90003AFC3E /* ManageDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410AA18358C90003AFC3E /* ManageDevicesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,10 @@
 		52B410A1183577BE003AFC3E /* SpeedSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedSelectionViewController.m; sourceTree = "<group>"; };
 		52B410A31835818B003AFC3E /* MojioClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioClient.h; sourceTree = "<group>"; };
 		52B410A41835818B003AFC3E /* MojioClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MojioClient.m; sourceTree = "<group>"; };
+		52B410A6183582DB003AFC3E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		52B410A7183582DB003AFC3E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		52B410A918358C90003AFC3E /* ManageDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageDevicesViewController.h; sourceTree = "<group>"; };
+		52B410AA18358C90003AFC3E /* ManageDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageDevicesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,11 +133,15 @@
 				52B4107A1835765E003AFC3E /* Main_iPhone.storyboard */,
 				52B4107D1835765E003AFC3E /* Main_iPad.storyboard */,
 				52B410801835765E003AFC3E /* HomeViewController.h */,
+				52B410A6183582DB003AFC3E /* LoginViewController.h */,
+				52B410A7183582DB003AFC3E /* LoginViewController.m */,
 				52B410811835765E003AFC3E /* HomeViewController.m */,
 				52B410831835765E003AFC3E /* Images.xcassets */,
 				52B4106F1835765E003AFC3E /* Supporting Files */,
 				52B410A0183577BE003AFC3E /* SpeedSelectionViewController.h */,
 				52B410A1183577BE003AFC3E /* SpeedSelectionViewController.m */,
+				52B410A918358C90003AFC3E /* ManageDevicesViewController.h */,
+				52B410AA18358C90003AFC3E /* ManageDevicesViewController.m */,
 			);
 			path = Mojio;
 			sourceTree = "<group>";
@@ -265,8 +275,10 @@
 			files = (
 				52B410821835765E003AFC3E /* HomeViewController.m in Sources */,
 				52B410791835765E003AFC3E /* AppDelegate.m in Sources */,
+				52B410A8183582DB003AFC3E /* LoginViewController.m in Sources */,
 				52B410751835765E003AFC3E /* main.m in Sources */,
 				52B410A2183577BE003AFC3E /* SpeedSelectionViewController.m in Sources */,
+				52B410AB18358C90003AFC3E /* ManageDevicesViewController.m in Sources */,
 				52B410A51835818B003AFC3E /* MojioClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
