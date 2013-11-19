@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MojioClient.h"
+#import "Session.h"
 
 @interface LoginViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *UsernameTextField;

@@ -41,7 +41,6 @@
     
     //get main storyboard, we will instantiate viewControllers from this
     self.storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    
 }
 
 - (void)didReceiveMemoryWarning

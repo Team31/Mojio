@@ -17,7 +17,7 @@
 
 @implementation MojioClient
 
--(BOOL)setUserWithUsername:(NSString*)username AndPassword:(NSString*)password
+-(NSString*)getAPIToken:(NSString*)username AndPassword:(NSString*)password
 {
     NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/login/%%7Bid%%7D/begin?id=87708830-31B7-464F-85D3-9E8FD22A2A10&secretKey=c861e8a6-e230-4bd4-9c7c-241144071254&userOrEmail=%@&password=%@&minutes=120",username, password];
     NSURL *url = [NSURL URLWithString:str];
@@ -26,11 +26,10 @@
     id response=[NSJSONSerialization JSONObjectWithData:data options:
                  NSJSONReadingMutableContainers error:&error];
     if ([response objectForKey:@"_id"]) {
-        self.apiToken = [response objectForKey:@"_id"];
-        return true;
+        return [response objectForKey:@"_id"];
     }
 
-    return false;
+    return @"";
 }
 
 -(NSString*)getTripData

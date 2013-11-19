@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "User.h"
+#import "MojioClient.h"
 
 @interface Session : NSObject
 
 @property (strong, nonatomic) User *currentUser;
+@property (strong, nonatomic) MojioClient *client;
 @property (strong, nonatomic) NSString *APIToken;
 
 + (Session *)sharedInstance;
+-(BOOL)login:(NSString*)username AndPassword:(NSString*)password;
 
 @end

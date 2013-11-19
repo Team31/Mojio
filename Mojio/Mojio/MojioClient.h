@@ -13,7 +13,7 @@
 @property (strong, nonatomic) NSString *appID, *secretKey, *apiToken;
 @property int pagesize;
 
--(BOOL)setUserWithUsername:(NSString*)username AndPassword:(NSString*)password;
+-(NSString*)getAPIToken:(NSString*)username AndPassword:(NSString*)password;
 -(NSString*)getTripData;
 
 

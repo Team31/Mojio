@@ -22,4 +22,21 @@
     return _sharedInstance;
 }
 
+-(MojioClient *) client
+{
+    if (!_client) _client = [[MojioClient alloc] init];
+    return _client;
+}
+
+-(BOOL)login:(NSString*)username AndPassword:(NSString*)password
+{
+    // set the session API token if login information is correct
+    NSString *response = [self.client getAPIToken:username AndPassword:password];
+    
+    if(response.length > 0){
+        self.APIToken = response;
+        return true;
+    }
+    return false;
+}
 @end

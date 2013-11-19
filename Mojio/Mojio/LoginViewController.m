@@ -7,10 +7,9 @@
 //
 
 #import "LoginViewController.h"
+#import "HomeViewController.h"
 
 @interface LoginViewController ()
-
-@property (nonatomic,strong) MojioClient* client;
 
 @end
 
@@ -29,7 +28,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.client = [[MojioClient alloc] init];
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.title = @"Login";
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,14 +39,17 @@
 }
 
 - (IBAction)LoginTapped:(id)sender {
-    if (self.UsernameTextField.text.length != 0) {
-        if ([self.client setUserWithUsername:@"team31" AndPassword:@"Teamthirty1"]){
+    if (self.UsernameTextField.text.length > 0 && self.PasswordTextField.text.length > 0) {
+        if ([[Session sharedInstance] login:self.UsernameTextField.text AndPassword:self.PasswordTextField.text]){
             self.StatusLabel.text = @"Login successful";
+            
+            // redirect to homepage
+            [[self navigationController] popViewControllerAnimated:YES];
         } else {
             self.StatusLabel.text = @"Username and password combination incorrect.";
         }
     } else {
-        self.StatusLabel.text = @"No valid username input";
+        self.StatusLabel.text = @"No valid username or password input";
     }
 }
 @end
