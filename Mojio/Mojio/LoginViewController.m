@@ -10,6 +10,8 @@
 
 @interface LoginViewController ()
 
+@property (nonatomic,strong) MojioClient* client;
+
 @end
 
 @implementation LoginViewController
@@ -27,6 +29,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.client = [[MojioClient alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,7 +40,11 @@
 
 - (IBAction)LoginTapped:(id)sender {
     if (self.UsernameTextField.text.length != 0) {
-        self.StatusLabel.text = @"Username entered";
+        if ([self.client setUserWithUsername:@"team31" AndPassword:@"Teamthirty1"]){
+            self.StatusLabel.text = @"Login successful";
+        } else {
+            self.StatusLabel.text = @"Username and password combination incorrect.";
+        }
     } else {
         self.StatusLabel.text = @"No valid username input";
     }
