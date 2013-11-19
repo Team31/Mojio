@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SpeedSelectionViewController : UIViewController
-
+@interface SpeedSelectionViewController : UIViewController     <UIPickerViewDataSource,UIPickerViewDelegate>
+@property (strong, nonatomic) IBOutlet UILabel *speedSelected;
+@property (strong, nonatomic) IBOutlet UIPickerView *speedSelection;
+@property (strong, nonatomic)          NSArray *speedSeletion;
+@property (strong, nonatomic) IBOutlet UIButton *resetButton;
+- (IBAction)resetPressed:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *setButton;
+- (IBAction)setButtonPressed:(id)sender;
 @end
