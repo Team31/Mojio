@@ -41,4 +41,10 @@
     XCTAssertEqual(loginViewController.UsernameTextField.text.length, 0U, @"Lenght does not equal 0");
     //XCTAssertEqual(loginViewController.UsernameTextField.text.length, 1U, @"Lenght does not equal 1");
 }
+
+//- (void)testLoginTapped
+//{
+//    LoginViewController *loginViewController = [[LoginViewController alloc] init];
+//    [loginViewController LoginTapped:[loginViewController.UsernameTextField viewWithTag:]];
+//    XCTAssertEqual(loginViewController.UsernameTextField.text.length, 0U, @"Lenght does not equal 0");}
 @end
