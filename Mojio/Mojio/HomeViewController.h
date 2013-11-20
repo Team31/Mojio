@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "SpeedSelectionViewController.h"
 #import "LoginViewController.h"
 #import "ManageDevicesViewController.h"
@@ -17,6 +18,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *speedSeleectionButton;
 - (IBAction)SpeedSelectionButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextView *tripDataTextView;
+
+- (IBAction)getTripDataButtponPressed:(id)sender;
 
 
 @end

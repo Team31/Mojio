@@ -173,12 +173,31 @@
                                     <action selector="SpeedSelectionButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="EG8-vn-AJc"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Trip data" translatesAutoresizingMaskIntoConstraints="NO" id="BLW-Wg-lLI">
+                                <rect key="frame" x="20" y="346" width="280" height="146"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.87843143940000001" green="0.9215686917" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dng-kv-M0L">
+                                <rect key="frame" x="49" y="500" width="223" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.87843143940000001" green="0.9215686917" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="Get most recent trip data">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getTripDataButtponPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="A7b-ev-MwG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="wvR-dE-K3c"/>
                     <connections>
                         <outlet property="speedSeleectionButton" destination="5JT-C7-612" id="WU5-xm-owP"/>
+                        <outlet property="tripDataTextView" destination="BLW-Wg-lLI" id="siD-i4-wTQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

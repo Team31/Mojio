@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		525E74E2183C1CA6002C0B70 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525E74E1183C1CA6002C0B70 /* CoreLocation.framework */; };
 		52AA98EF1835CB7C00577E0B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AA98EE1835CB7C00577E0B /* User.m */; };
 		52AA98F21835CB8700577E0B /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AA98F11835CB8700577E0B /* Device.m */; };
 		52AA98F51835CB9100577E0B /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AA98F41835CB9100577E0B /* Session.m */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		525E74E1183C1CA6002C0B70 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		52AA98ED1835CB7C00577E0B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		52AA98EE1835CB7C00577E0B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		52AA98F01835CB8700577E0B /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525E74E2183C1CA6002C0B70 /* CoreLocation.framework in Frameworks */,
 				52B4106B1835765E003AFC3E /* CoreGraphics.framework in Frameworks */,
 				52B4106D1835765E003AFC3E /* UIKit.framework in Frameworks */,
 				52B410691835765E003AFC3E /* Foundation.framework in Frameworks */,
@@ -166,6 +169,7 @@
 		52B410671835765E003AFC3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				525E74E1183C1CA6002C0B70 /* CoreLocation.framework */,
 				52B410681835765E003AFC3E /* Foundation.framework */,
 				52B4106A1835765E003AFC3E /* CoreGraphics.framework */,
 				52B4106C1835765E003AFC3E /* UIKit.framework */,

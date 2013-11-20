@@ -32,7 +32,7 @@
     return @"";
 }
 
--(NSString*)getTripData
+-(NSMutableDictionary*)getTripData
 {
     if (self.apiToken) {
         //TODO pagesize should be variable
@@ -50,9 +50,9 @@
         id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
                      NSJSONReadingMutableContainers error:nil];
         
-        NSArray *trips = [responseData objectForKey:@"Data"];
-        NSString *tripString = [NSString stringWithFormat:@"%@", trips];
-        return tripString;
+      //  NSArray *trips = [responseData objectForKey:@"Data"];
+      //  NSString *tripString = [NSString stringWithFormat:@"%@", responseData];
+        return responseData;
         
     }
     else
@@ -62,6 +62,37 @@
     }
     
 }
+
+-(NSMutableDictionary*)getEventDataForTrip:(NSString*)tripID
+{
+    if (self.apiToken) {
+        //TODO pagesize should be variable
+        //Insert tripID
+        NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/trips/%@/events?pageSize=10",tripID];
+        NSURL *url = [NSURL URLWithString:str];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSMutableURLRequest *mutableRequest = [request mutableCopy];
+        [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
+        request = [mutableRequest copy];
+        
+        NSHTTPURLResponse *response = nil;
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+        
+        id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
+                         NSJSONReadingMutableContainers error:nil];
+        
+        return responseData;
+        
+    }
+    else
+    {
+        NSLog(@"No trip data recieved");
+        return nil;
+    }
+    
+}
+
 
 
 

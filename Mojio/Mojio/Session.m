@@ -35,6 +35,9 @@
     
     if(response.length > 0){
         self.APIToken = response;
+        self.client.apiToken = response;
+        //TODO: I think its redundant for us to set two apiTokens
+        //TODO: apitoken should persist, it gets reset on every app launch now
         return true;
     }
     return false;

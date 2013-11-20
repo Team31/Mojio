@@ -14,7 +14,9 @@
 @property int pagesize;
 
 -(NSString*)getAPIToken:(NSString*)username AndPassword:(NSString*)password;
--(NSString*)getTripData;
+-(NSMutableDictionary*)getTripData;
+-(NSMutableDictionary*)getEventDataForTrip:(NSString*)tripID;
+
 
 
 @end
