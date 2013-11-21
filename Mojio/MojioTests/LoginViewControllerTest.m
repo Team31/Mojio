@@ -41,29 +41,29 @@
 //    //XCTAssertEqual(loginViewController.UsernameTextField.text.length, 1U, @"Lenght does not equal 1");
 //}
 
-- (void)testLoginTapped
+- (void)testLoginValid
 {
-//    self.lvc.UsernameTextField = [[UITextField alloc] init];
-//    self.lvc.PasswordTextField = [[UITextField alloc] init];
-//    self.lvc.StatusLabel = [[UILabel alloc] init];
-//    self.lvc.UsernameTextField.text = @"test";
-//    self.lvc.PasswordTextField.text = @"test";
-//    self.lvc.StatusLabel.text = @"test";
-//    NSString *expectation = @"Username and password combination incorrect.";
-//    [UIButton buttonWithType:self.lvc.LoginButton];
-    //self.lvc.LoginButton = [[UIButton alloc] init];
-    //[self.lvc.LoginButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-    	//printf("%s",[lvc.UsernameTextField.text UTF8String]);
-    //XCTAssertTrue([s	elf.lvc.StatusLabel.text isEqual:expectation], @"war");
-    //XCTAssertNil(self.lvc.UsernameTextField, @"PLZ");
-    //XCTAssertEqualObjects(self.lvc.StatusLabel.text, expectation, @"We should see login fails.");
-    //[loginViewController LoginTapped:[loginViewController LoginButton]];
-    //XCTAssertTrue([[loginViewController.StatusLabel st	);
-    //XCTAssertTrue([self.lvc.StatusLabel.text isEqualToString:@"Username and password combination incorrect."], @"Lenght does not equal 0");
+
     NSString *testUserName = @"team31";
     NSString *testPassword = @"Teamthirty1";
     
-    XCTAssertTrue([[Session sharedInstance] login:testUserName AndPassword:testPassword],@"HELP");
+    XCTAssertTrue([[Session sharedInstance] login:testUserName AndPassword:testPassword],@"Login with valid cred.");
+}
+
+- (void)testLoginInvalid
+{
+    NSString *testUserName = @"test";
+    NSString *testPassword = @"test";
+    
+    XCTAssertTrue(![[Session sharedInstance] login:testUserName AndPassword:testPassword],@"Login with invalid cred.");
+}
+
+- (void)testLoginEmpty
+{
+    NSString *testUserName = @"";
+    NSString *testPassword = @"";
+    
+    XCTAssertThrows([[Session sharedInstance] login:testUserName AndPassword:testPassword],@"Login with empty cred.");
 }
 
 - (void)tearDown
