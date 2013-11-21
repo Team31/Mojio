@@ -53,7 +53,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -70,6 +70,10 @@
         case 1:
             cell.textLabel.text = self.device.nickname;
             cell.detailTextLabel.text = @"Nickname";
+            break;
+        case 2:
+            cell.textLabel.text = [NSString stringWithFormat:@"%i",self.device.speedLimit];
+            cell.detailTextLabel.text = @"Speed Limit";
             break;
         default:
             break;

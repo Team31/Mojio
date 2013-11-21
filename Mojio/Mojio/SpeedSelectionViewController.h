@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Session.h"
+#import "Device.h"
 
 
 @interface SpeedSelectionViewController : UIViewController     <UIPickerViewDataSource,UIPickerViewDelegate>

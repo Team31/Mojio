@@ -157,6 +157,10 @@ NSInteger speedS;
         _toggleUnite.selectedSegmentIndex = 0;
 }
 - (IBAction)setButtonPressed:(id)sender {
+    //set the device's max speed to speedS
+    ((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:0]).speedLimit = speedS;
+
+    
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
