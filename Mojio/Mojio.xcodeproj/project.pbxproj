@@ -27,10 +27,10 @@
 		52B4108C1835765E003AFC3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B410681835765E003AFC3E /* Foundation.framework */; };
 		52B4108D1835765E003AFC3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B4106C1835765E003AFC3E /* UIKit.framework */; };
 		52B410951835765E003AFC3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52B410931835765E003AFC3E /* InfoPlist.strings */; };
-		52B410971835765E003AFC3E /* MojioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410961835765E003AFC3E /* MojioTests.m */; };
 		52B410A2183577BE003AFC3E /* SpeedSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410A1183577BE003AFC3E /* SpeedSelectionViewController.m */; };
 		52B410A51835818B003AFC3E /* MojioClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410A41835818B003AFC3E /* MojioClient.m */; };
 		52B410A8183582DB003AFC3E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410A7183582DB003AFC3E /* LoginViewController.m */; };
+		6186D5C7183D334C00E438C2 /* LoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410961835765E003AFC3E /* LoginViewControllerTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +74,7 @@
 		52B4108A1835765E003AFC3E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		52B410921835765E003AFC3E /* MojioTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MojioTests-Info.plist"; sourceTree = "<group>"; };
 		52B410941835765E003AFC3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		52B410961835765E003AFC3E /* MojioTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MojioTests.m; sourceTree = "<group>"; };
+		52B410961835765E003AFC3E /* LoginViewControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewControllerTest.m; sourceTree = "<group>"; };
 		52B410A0183577BE003AFC3E /* SpeedSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedSelectionViewController.h; sourceTree = "<group>"; };
 		52B410A1183577BE003AFC3E /* SpeedSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedSelectionViewController.m; sourceTree = "<group>"; };
 		52B410A31835818B003AFC3E /* MojioClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioClient.h; sourceTree = "<group>"; };
@@ -208,7 +208,7 @@
 		52B410901835765E003AFC3E /* MojioTests */ = {
 			isa = PBXGroup;
 			children = (
-				52B410961835765E003AFC3E /* MojioTests.m */,
+				52B410961835765E003AFC3E /* LoginViewControllerTest.m */,
 				52B410911835765E003AFC3E /* Supporting Files */,
 			);
 			path = MojioTests;
@@ -339,7 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52B410971835765E003AFC3E /* MojioTests.m in Sources */,
+				6186D5C7183D334C00E438C2 /* LoginViewControllerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
