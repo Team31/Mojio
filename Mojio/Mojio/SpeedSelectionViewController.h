@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface SpeedSelectionViewController : UIViewController     <UIPickerViewDataSource,UIPickerViewDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *speedSelected;
 @property (strong, nonatomic) IBOutlet UIPickerView *speedSelection;
@@ -16,4 +17,6 @@
 - (IBAction)resetPressed:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *setButton;
 - (IBAction)setButtonPressed:(id)sender;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *toggleUnite;
+- (IBAction)toggleChanged:(id)sender;
 @end
