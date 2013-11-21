@@ -10,36 +10,15 @@
 #import "LoginViewController.h"
 
 @interface LoginViewControllerTest : XCTestCase
-//@property(nonatomic, strong) LoginViewController *lvc;
 @end
 
 @implementation LoginViewControllerTest
-//@synthesize lvc;
+
 
 - (void)setUp
 {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    //self.lvc = [[LoginViewController alloc] init];
-    //[lvc view];
 }
-
-
-
-
-//- (void)testLogin
-//{
-//    LoginViewController *loginViewController = [[LoginViewController alloc] init];
-//    XCTAssertEqual(loginViewController.UsernameTextField.text.length, 0U, @"Lenght does not equal 0");
-//    //XCTAssertEqual(loginViewController.UsernameTextField.text.length, 1U, @"Lenght does not equal 1");
-//}
-//
-//- (void)test
-//{
-//    LoginViewController *loginViewController = [[LoginViewController alloc] init];
-//    XCTAssertEqual(loginViewController.UsernameTextField.text.length, 0U, @"Lenght does not equal 0");
-//    //XCTAssertEqual(loginViewController.UsernameTextField.text.length, 1U, @"Lenght does not equal 1");
-//}
 
 - (void)testLoginValid
 {
