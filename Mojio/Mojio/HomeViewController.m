@@ -23,7 +23,7 @@
     
     //Make test data (only for testing, remove later)
     [self makeTestData];
-    
+    //[self populateDeviceData];
     
     //make home page title the first device nickname, if it exists
     if (((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:0]).nickname)
@@ -63,6 +63,31 @@
 - (void)manageDevicesTapped {
     UIViewController *manageDevicesViewController = (ManageDevicesViewController *)[self.storyBoard instantiateViewControllerWithIdentifier:@"ManageDevicesViewController"];
     [self.navigationController pushViewController:manageDevicesViewController animated:true];
+}
+
+- (void)populateDeviceData{
+    // store relevant device data
+    NSMutableArray* deviceList = [[NSMutableArray alloc] init];
+    
+    // device data returned from Mojio server
+    NSMutableArray* deviceData = [[[[Session sharedInstance] client] getDevices] objectForKey:@"Data"];
+    
+    for (NSMutableDictionary *event in deviceData) {
+        // define each device: idNumber, speedLimit and nickname
+        Device *device = [[Device alloc] init];
+        device.speedLimit = 10;
+        device.idNumber = [event objectForKey:@"_id"];
+        device.nickname = [event objectForKey:@"Name"];
+        
+        // and add it to deviceList
+        [deviceList addObject:device];
+    }
+    User *userOne = [[User alloc] init];
+    [userOne setUsername:@"TestUserName"];
+    [userOne setDevices:deviceList];
+    //start session singlton
+    [[Session sharedInstance] setCurrentUser:userOne];
+    
 }
 
 - (void)makeTestData{
@@ -173,5 +198,22 @@
         [alert show];
 
     }
+}
+- (IBAction)getUserDataButtonPressed:(id)sender {
+    /*NSMutableArray* userData = [[[[Session sharedInstance] client] getUserData] objectForKey:@"Data"];
+    NSMutableDictionary* userDict = [userData objectAtIndex:[userData count]-1];
+    
+    [userDict setValue:@"80" forKey:@"speed"];
+    NSString* userID = [userDict objectForKey:@"_id"];
+    
+    [[[Session sharedInstance] client] saveUserData:userDict AndID:userID];
+    
+    NSMutableArray* deviceData = [[[[Session sharedInstance] client] getDevices] objectForKey:@"Data"];
+    NSMutableDictionary* deviceDict = [deviceData objectAtIndex:[deviceData count]-1];
+    
+    NSString* deviceString = [NSString stringWithFormat:@"device: %@", deviceDict];
+    self.userDataTextView.text = deviceString;*/
+    
+    [self populateDeviceData];
 }
 @end

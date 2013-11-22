@@ -94,6 +94,113 @@
 }
 
 
+-(NSMutableDictionary*)getUserData
+{
+    if (self.apiToken) {
+        //TODO pagesize should be variable
+        NSString *str = @"http://sandbox.developer.moj.io/v1/users/";
+        NSURL *url = [NSURL URLWithString:str];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSMutableURLRequest *mutableRequest = [request mutableCopy];
+        [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
+        request = [mutableRequest copy];
+        
+        NSHTTPURLResponse *response = nil;
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+        
+        id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
+                         NSJSONReadingMutableContainers error:nil];
+        
+        //  NSArray *trips = [responseData objectForKey:@"Data"];
+        //  NSString *tripString = [NSString stringWithFormat:@"%@", responseData];
+        return responseData;
+        
+    }
+    else
+    {
+        NSLog(@"No user data recieved");
+        return nil;
+    }
+    
+}
 
+-(NSMutableDictionary*)getDevices
+{
+    if (self.apiToken) {
+        //TODO pagesize should be variable
+        NSString *str = @"http://sandbox.developer.moj.io/v1/mojios/";
+        NSURL *url = [NSURL URLWithString:str];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSMutableURLRequest *mutableRequest = [request mutableCopy];
+        [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
+        request = [mutableRequest copy];
+        
+        NSHTTPURLResponse *response = nil;
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+        
+        id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
+                         NSJSONReadingMutableContainers error:nil];
+        
+        //  NSArray *trips = [responseData objectForKey:@"Data"];
+        //  NSString *tripString = [NSString stringWithFormat:@"%@", responseData];
+        return responseData;
+        
+    }
+    else
+    {
+        NSLog(@"No user data recieved");
+        return nil;
+    }
+    
+}
+
+-(void)saveUserData:(NSMutableDictionary*)userDict AndID:(NSString*)userID
+{
+    NSError* error;
+    if (self.apiToken) {
+        NSString *str = [NSString stringWithFormat:@"https://developer.moj.io/v1/users/%@", userID];
+        NSURL *url = [NSURL URLWithString:str];
+        NSString *jsonString;
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userDict options:NSJSONWritingPrettyPrinted error:&error];
+        
+        if (! jsonData) {
+            NSLog(@"Got an error: %@", error);
+        } else {
+            jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        }
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSMutableURLRequest *mutableRequest = [request mutableCopy];
+        [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
+        
+        [mutableRequest setHTTPMethod:@"PUT"];
+        [mutableRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [mutableRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [mutableRequest setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
+        [mutableRequest setHTTPBody: jsonData];
+        
+        request = [mutableRequest copy];
+        
+        NSHTTPURLResponse *response = nil;
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+        
+        /*id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
+                         NSJSONReadingMutableContainers error:nil];*/
+        
+        //  NSArray *trips = [responseData objectForKey:@"Data"];
+        //  NSString *tripString = [NSString stringWithFormat:@"%@", responseData];
+        //return responseData;
+        
+    }
+    else
+    {
+        NSLog(@"No user data recieved");
+        //return nil;
+    }
+    
+}
 
 @end

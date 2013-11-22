@@ -16,6 +16,9 @@
 -(NSString*)getAPIToken:(NSString*)username AndPassword:(NSString*)password;
 -(NSMutableDictionary*)getTripData;
 -(NSMutableDictionary*)getEventDataForTrip:(NSString*)tripID;
+-(NSMutableDictionary*)getUserData;
+-(NSMutableDictionary*)getDevices;
+-(void)saveUserData:(NSMutableDictionary*)userDict AndID:(NSString*)userID;
 
 
 
