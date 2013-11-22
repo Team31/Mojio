@@ -18,7 +18,7 @@
 -(NSMutableDictionary*)getEventDataForTrip:(NSString*)tripID;
 -(NSMutableDictionary*)getUserData;
 -(NSMutableDictionary*)getDevices;
--(void)saveUserData:(NSMutableDictionary*)userDict AndID:(NSString*)userID;
+-(void)saveDeviceData:(NSString*)deviceID andName:(NSString*)deviceName;
 
 
 

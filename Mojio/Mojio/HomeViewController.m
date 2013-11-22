@@ -215,5 +215,6 @@
     self.userDataTextView.text = deviceString;*/
     
     [self populateDeviceData];
+    //[[[Session sharedInstance] client] saveDeviceData:@"testing" andName:@"testworkedfail"];
 }
 @end

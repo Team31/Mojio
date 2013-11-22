@@ -156,30 +156,37 @@
     
 }
 
--(void)saveUserData:(NSMutableDictionary*)userDict AndID:(NSString*)userID
+-(void)saveDeviceData:(NSString*)deviceID andName:(NSString*)deviceName
 {
     NSError* error;
     if (self.apiToken) {
-        NSString *str = [NSString stringWithFormat:@"https://developer.moj.io/v1/users/%@", userID];
+        NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/mojios/%@", deviceID];
         NSURL *url = [NSURL URLWithString:str];
         NSString *jsonString;
         
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userDict options:NSJSONWritingPrettyPrinted error:&error];
+        NSMutableDictionary *deviceDict = [[NSMutableDictionary alloc] init];
+        [deviceDict setValue:deviceID forKey:@"Id"];
+        [deviceDict setValue:deviceID forKey:@"_id"];
+        [deviceDict setValue:deviceName forKey:@"Name"];
+        [deviceDict setValue:@"save" forKey:@"action"];
         
-        if (! jsonData) {
-            NSLog(@"Got an error: %@", error);
-        } else {
-            jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        }
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:deviceDict options:NSJSONWritingPrettyPrinted error:&error];
+        
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         NSMutableURLRequest *mutableRequest = [request mutableCopy];
+        
+        // hacks for now
+        //self.apiToken=@"444eb588-ce29-4d4d-a20d-a7d62d88ce38";
+        
         [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
         
         [mutableRequest setHTTPMethod:@"PUT"];
         [mutableRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [mutableRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [mutableRequest setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
+        [mutableRequest setValue:[NSString stringWithFormat:@"%d", [jsonString length]] forHTTPHeaderField:@"Content-Length"];
         [mutableRequest setHTTPBody: jsonData];
         
         request = [mutableRequest copy];
@@ -187,6 +194,9 @@
         NSHTTPURLResponse *response = nil;
         NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
         
+        NSString* testString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+        
+        NSLog(testString);
         /*id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
                          NSJSONReadingMutableContainers error:nil];*/
         
