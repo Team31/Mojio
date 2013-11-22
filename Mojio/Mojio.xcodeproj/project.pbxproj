@@ -31,6 +31,7 @@
 		52B410A51835818B003AFC3E /* MojioClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410A41835818B003AFC3E /* MojioClient.m */; };
 		52B410A8183582DB003AFC3E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410A7183582DB003AFC3E /* LoginViewController.m */; };
 		6186D5C7183D334C00E438C2 /* LoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B410961835765E003AFC3E /* LoginViewControllerTest.m */; };
+		6188093C183EB203005ACCA4 /* MojioClientTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6188093B183EB203005ACCA4 /* MojioClientTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		52B410A41835818B003AFC3E /* MojioClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MojioClient.m; sourceTree = "<group>"; };
 		52B410A6183582DB003AFC3E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		52B410A7183582DB003AFC3E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6188093B183EB203005ACCA4 /* MojioClientTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MojioClientTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 			children = (
 				52B410961835765E003AFC3E /* LoginViewControllerTest.m */,
 				52B410911835765E003AFC3E /* Supporting Files */,
+				6188093B183EB203005ACCA4 /* MojioClientTest.m */,
 			);
 			path = MojioTests;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6186D5C7183D334C00E438C2 /* LoginViewControllerTest.m in Sources */,
+				6188093C183EB203005ACCA4 /* MojioClientTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
