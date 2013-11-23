@@ -3,7 +3,7 @@ source ~/.bash_profile
 
 DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 xcodebuild -sdk iphonesimulator \
-	   -workspace Mojio.xcodeproj/project.xcworkspace \
+	   -workspace Mojio/Mojio.xcodeproj/project.xcworkspace \
 	   -scheme Mojio \
 	   -configuration Debug test \
 	   -RUN_APPLICATION_WITH_IOS_SIM=YES \
