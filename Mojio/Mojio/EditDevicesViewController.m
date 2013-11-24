@@ -23,6 +23,7 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -58,38 +59,62 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"textcell";
+    UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(110, 10, 185, 30)];
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-    
-    // Configure the cell...
-    switch (indexPath.row) {
-        case 0:
-            cell.textLabel.text = self.device.idNumber;
-            cell.detailTextLabel.text = @"ID number";
-            break;
-        case 1:
-            cell.textLabel.text = self.device.nickname;
-            cell.detailTextLabel.text = @"Nickname";
-            break;
-        case 2:
-            cell.textLabel.text = [NSString stringWithFormat:@"%i",self.device.speedLimit];
-            cell.detailTextLabel.text = @"Speed Limit";
-            break;
-        default:
-            break;
+    if ([indexPath section] == 0) {
+        playerTextField.adjustsFontSizeToFitWidth = YES;
+        playerTextField.textColor = [UIColor blackColor];
     }
+    if ([indexPath row] == 0) {
+        playerTextField.placeholder = self.device.idNumber;
+        playerTextField.returnKeyType = UIReturnKeyNext;
+        playerTextField.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    }
+    else if ([indexPath row] == 1) {
+        playerTextField.placeholder = self.device.nickname;
+        playerTextField.returnKeyType = UIReturnKeyNext;
+    }
+    else {
+        playerTextField.placeholder = [NSString stringWithFormat:@"%i",self.device.speedLimit];
+        playerTextField.returnKeyType = UIReturnKeyNext;
+    }
+    playerTextField.textAlignment = NSTextAlignmentRight;
+    playerTextField.backgroundColor = [UIColor whiteColor];
+    playerTextField.autocorrectionType = UITextAutocorrectionTypeNo; // no auto correction support
+    playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
+    playerTextField.tag = 0;
     
+    playerTextField.clearButtonMode = UITextFieldViewModeNever; // no clear 'x' button to the right
+    [playerTextField setEnabled: YES];
+    
+    [cell.contentView addSubview:playerTextField];
+
+    if ([indexPath section] == 0) {
+        if ([indexPath row] == 0) {
+            cell.textLabel.text = @"ID number";
+        }
+        else if ([indexPath row] == 1){
+            cell.textLabel.text = @"Nickname";
+        }
+        else
+            cell.textLabel.text = @"Speed Limit";
+    }
     return cell;
 }
 
-
 // Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+/*- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
 }
-
-
+*/
+/*- (IBAction)enterEditMode:(id)sender {
+    
+    if ([self.tableView isEditing]) {
+        // If the tableView is already in edit mode, turn it off. Also change the title of the button to reflect the intended verb (‘Edit’, in this case).
+    }
+*/
 /*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

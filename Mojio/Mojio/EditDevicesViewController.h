@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Device.h"
+#import "Session.h"
 
-@interface EditDevicesViewController : UITableViewController
+@interface EditDevicesViewController : UITableViewController <UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
 @property (weak, nonatomic) Device *device;
+
 @end
