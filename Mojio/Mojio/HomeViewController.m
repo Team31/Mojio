@@ -238,6 +238,11 @@
     self.userDataTextView.text = deviceString;*/
     
     [self populateDeviceData];
-    //[[[Session sharedInstance] client] saveDeviceData:@"testing" andName:@"testworkedfail"];
+    //[[[Session sharedInstance] client] saveDeviceData:@"testing" andName:@"testworkedwork"];
+    //[[[Session sharedInstance] client] storeMojio:@"testing" andKey:@"test2" andValue:@"work2"];
+    //[[[Session sharedInstance] client] getStoredMojio:@"testing" andKey:@"test1"];
+    //[[[Session sharedInstance] client] deleteStoredMojio:@"testing" andKey:@"test2"];
+    //[[[Session sharedInstance] client] getStoredMojio:@"testing" andKey:@"test2"];
+
 }
 @end

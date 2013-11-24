@@ -168,6 +168,7 @@
         [deviceDict setValue:deviceID forKey:@"Id"];
         [deviceDict setValue:deviceID forKey:@"_id"];
         [deviceDict setValue:deviceName forKey:@"Name"];
+        [deviceDict setValue:@"80" forKey:@"Speed"];
         [deviceDict setValue:@"save" forKey:@"action"];
         
         
@@ -179,7 +180,7 @@
         NSMutableURLRequest *mutableRequest = [request mutableCopy];
         
         // hacks for now
-        //self.apiToken=@"444eb588-ce29-4d4d-a20d-a7d62d88ce38";
+        //self.apiToken=@"431b0301-d225-4d7b-a31e-2e00d198d3f2";
         
         [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
         
@@ -194,15 +195,7 @@
         NSHTTPURLResponse *response = nil;
         NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
         
-        NSString* testString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-        
-        NSLog(testString);
-        /*id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
-                         NSJSONReadingMutableContainers error:nil];*/
-        
-        //  NSArray *trips = [responseData objectForKey:@"Data"];
-        //  NSString *tripString = [NSString stringWithFormat:@"%@", responseData];
-        //return responseData;
+        //NSLog(@"%@",[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding]);
         
     }
     else
@@ -218,6 +211,111 @@
         return true;
     }
     return false;
+}
+
+-(BOOL)storeMojio:(NSString*)deviceID andKey:(NSString*)key andValue:(NSString*)value{
+    // store a key value pair for a device
+    // use getStoredMojio with the deviceID key to grab the value
+    
+    if (self.apiToken) {
+        NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/mojios/%@/store/%@", deviceID,key];
+        NSURL *url = [NSURL URLWithString:str];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSMutableURLRequest *mutableRequest = [request mutableCopy];
+        NSMutableData *body = [NSMutableData data];
+        
+        // only strings are supported currently
+        [body appendData:[[NSString stringWithFormat:@"\"%@\"",value] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
+        
+        [mutableRequest setHTTPMethod:@"PUT"];
+        [mutableRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [mutableRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [mutableRequest setValue:[NSString stringWithFormat:@"%d", [value length]] forHTTPHeaderField:@"Content-Length"];
+        [mutableRequest setHTTPBody: body];
+        
+        request = [mutableRequest copy];
+        
+        NSHTTPURLResponse *response = nil;
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+        
+        NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+        
+        // if no response text is given, the put was successful
+        if (returnString.length == 0) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
+    else
+    {
+        NSLog(@"No user data recieved");
+        return false;
+    }
+}
+-(NSString*)getStoredMojio:(NSString*)deviceID andKey:(NSString*)key{
+    if (self.apiToken) {
+        NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/mojios/%@/store/%@",deviceID, key];
+        NSURL *url = [NSURL URLWithString:str];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSMutableURLRequest *mutableRequest = [request mutableCopy];
+        [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
+        request = [mutableRequest copy];
+        
+        NSHTTPURLResponse *response = nil;
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+        id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
+                         NSJSONReadingMutableContainers error:nil];
+        
+        // return the value string if successful
+        if (responseData == nil) {
+            NSString* value=[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+            return value;
+        } else {
+            NSLog(@"Key: %@ is not defined", key);
+            return nil;
+        }
+    }
+    else
+    {
+        NSLog(@"No user data recieved");
+        return nil;
+    }
+}
+-(BOOL)deleteStoredMojio:(NSString*)deviceID andKey:(NSString*)key{
+    if (self.apiToken) {
+        NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/mojios/%@/store/%@",deviceID, key];
+        NSURL *url = [NSURL URLWithString:str];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSMutableURLRequest *mutableRequest = [request mutableCopy];
+        [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
+        [mutableRequest setHTTPMethod:@"DELETE"];
+        request = [mutableRequest copy];
+        
+        NSHTTPURLResponse *response = nil;
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+        
+        NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+        
+        // if no response text is given, the put was successful
+        if (returnString.length == 0) {
+            return true;
+        } else {
+            return false;
+    
+        }
+    }
+    else
+    {
+        NSLog(@"No user data recieved");
+        return false;
+    }
 }
 
 @end
