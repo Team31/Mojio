@@ -73,34 +73,14 @@
     // device data returned from Mojio server
     NSMutableArray* deviceDataReturned = [[[[Session sharedInstance] client] getDevices] objectForKey:@"Data"];
     
-    NSString* speedLimitReturned = [[NSString alloc]init];
-    NSString* onOffReturned = [[NSString alloc]init];
-    
     for (NSMutableDictionary *deviceData in deviceDataReturned) {
         // define each device: idNumber, speedLimit, onOff and nickname
         Device *device = [[Device alloc] init];
-        device.idNumber = [deviceData objectForKey:@"_id"];
-        device.nickname = [deviceData objectForKey:@"Name"];
+        [device setIdNumber:[deviceData objectForKey:@"_id"]];
+        [device setNickname:[deviceData objectForKey:@"Name"]];
         
-        // get speed limit from Mojio server if defined, otherwise set speed limit to zero and onOff to off
-        speedLimitReturned = [[[Session sharedInstance] client] getStoredMojio:device.idNumber andKey:@"speedLimit"];
-        if (speedLimitReturned != nil) {
-            // remove double quotes from the start and end of the string so the integer conversion works properly
-            speedLimitReturned = [speedLimitReturned substringFromIndex:1];
-            speedLimitReturned = [speedLimitReturned substringToIndex:[speedLimitReturned length] - 1];
-            device.speedLimit = [speedLimitReturned intValue];
-            
-            // get on off status of the device if speed limit is set
-            onOffReturned = [[[Session sharedInstance] client] getStoredMojio:device.idNumber andKey:@"onOff"];
-            if ([onOffReturned isEqualToString:@"\"TRUE\""]){
-                device.onOff = true;
-            } else {
-                device.onOff = false;
-            }
-        } else {
-            device.speedLimit = 0;
-            device.onOff = false;
-        }
+        // set the device speed limit and on/off status
+        [device setDeviceSpeedLimitData];
         
         // and add it to deviceList
         [deviceList addObject:device];

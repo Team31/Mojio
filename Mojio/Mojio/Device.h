@@ -14,4 +14,6 @@
 @property (assign) BOOL onOff;
 @property int speedLimit;
 
+- (void)setDeviceSpeedLimitData;
+
 @end
