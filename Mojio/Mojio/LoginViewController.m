@@ -28,14 +28,22 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.navigationItem.hidesBackButton = YES;
+    //self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Login";
+    
+    if ([[[Session sharedInstance] client] isUserLoggedIn]) {
+        self.StatusLabel.text = @"You are already logged in";
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)registerButtonPressed:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://sandbox.developer.moj.io/Account/register"]];
 }
 
 - (IBAction)LoginTapped:(id)sender {

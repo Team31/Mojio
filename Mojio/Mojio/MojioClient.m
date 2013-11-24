@@ -210,7 +210,14 @@
         NSLog(@"No user data recieved");
         //return nil;
     }
-    
+}
+
+-(BOOL)isUserLoggedIn{
+    //if you can get the user data with the current API, the user is logged in
+    if ([[self getUserData] objectForKey:@"Data"]) {
+        return true;
+    }
+    return false;
 }
 
 @end

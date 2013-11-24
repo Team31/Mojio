@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5254932C18418EF1003B1009 /* mojioIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5254932B18418EF1003B1009 /* mojioIcon.png */; };
 		525E74E2183C1CA6002C0B70 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525E74E1183C1CA6002C0B70 /* CoreLocation.framework */; };
 		52AA98EF1835CB7C00577E0B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AA98EE1835CB7C00577E0B /* User.m */; };
 		52AA98F21835CB8700577E0B /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AA98F11835CB8700577E0B /* Device.m */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5254932B18418EF1003B1009 /* mojioIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mojioIcon.png; sourceTree = "<group>"; };
 		525E74E1183C1CA6002C0B70 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		52AA98ED1835CB7C00577E0B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		52AA98EE1835CB7C00577E0B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -110,6 +112,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5254932818418E16003B1009 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5254932B18418EF1003B1009 /* mojioIcon.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		52AA98EA1835CAD000577E0B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +193,7 @@
 		52B4106E1835765E003AFC3E /* Mojio */ = {
 			isa = PBXGroup;
 			children = (
+				5254932818418E16003B1009 /* Resources */,
 				52AA98EC1835CB6600577E0B /* Models */,
 				52AA98EB1835CAEC00577E0B /* Client */,
 				52AA98EA1835CAD000577E0B /* ViewControllers */,
@@ -303,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52B4107F1835765E003AFC3E /* Main_iPad.storyboard in Resources */,
+				5254932C18418EF1003B1009 /* mojioIcon.png in Resources */,
 				52B410841835765E003AFC3E /* Images.xcassets in Resources */,
 				52B4107C1835765E003AFC3E /* Main_iPhone.storyboard in Resources */,
 				52B410731835765E003AFC3E /* InfoPlist.strings in Resources */,

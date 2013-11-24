@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>E0CF574B-D419-40B0-85DB-A49EAE39B467</string>
+	<string>BB3D69DD-6CAC-45F0-915C-2D1077CBA512</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Mojio</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>AB49C666-7F3E-4D48-AE10-EB7E2A747A55</key>
-		<string>https://github.com/Team31/Mojio.git</string>
+		<key>28FA43F9-825D-4E1C-8D76-923E2B1FB14B</key>
+		<string>https://github.com/Team31/Mojio</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Mojio/Mojio.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>AB49C666-7F3E-4D48-AE10-EB7E2A747A55</key>
+		<key>28FA43F9-825D-4E1C-8D76-923E2B1FB14B</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/Team31/Mojio.git</string>
+	<string>https://github.com/Team31/Mojio</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>AB49C666-7F3E-4D48-AE10-EB7E2A747A55</string>
+	<string>28FA43F9-825D-4E1C-8D76-923E2B1FB14B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>AB49C666-7F3E-4D48-AE10-EB7E2A747A55</string>
+			<string>28FA43F9-825D-4E1C-8D76-923E2B1FB14B</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Mojio_Jenkins</string>
+			<string>Mojio</string>
 		</dict>
 	</array>
 </dict>

@@ -19,6 +19,7 @@
 -(NSMutableDictionary*)getUserData;
 -(NSMutableDictionary*)getDevices;
 -(void)saveDeviceData:(NSString*)deviceID andName:(NSString*)deviceName;
+-(BOOL)isUserLoggedIn;
 
 
 

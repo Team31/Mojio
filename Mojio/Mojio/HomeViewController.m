@@ -18,13 +18,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //TODO: Check if a user is currently logged in
-    //This is just for testing with some data until we can pull it from the mojio server
+    //Check if a user is currently logged in, pull data if they are
+    [self attemptUserLogin];
     
-    //Make test data (only for testing, remove later)
-    [self makeTestData];
-    //[self populateDeviceData];
     
+    //set the navigtion bar left and right buttons
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Devices" style:UIBarButtonItemStylePlain target:self action:@selector(manageDevicesTapped)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(loginTapped)];
+    
+    //get main storyboard, we will instantiate viewControllers from this
+    self.storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
     //make home page title the first device nickname, if it exists
     if (((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:0]).nickname)
     {
@@ -35,13 +43,6 @@
         self.navigationItem.title = @"Home";
     }
 
-    //set the navigtion bar left and right buttons
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Devices" style:UIBarButtonItemStylePlain target:self action:@selector(manageDevicesTapped)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(loginTapped)];
-    
-    //get main storyboard, we will instantiate viewControllers from this
-    self.storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,6 +89,9 @@
     //start session singlton
     [[Session sharedInstance] setCurrentUser:userOne];
     
+    //refresh the homepage title for the new device downloaded
+    [self viewDidAppear:true];
+    
 }
 
 - (void)makeTestData{
@@ -113,6 +117,21 @@
     [[Session sharedInstance] setCurrentUser:userOne];
 
 }
+
+- (void)attemptUserLogin{
+    //get APItoken from NSUserdefaults
+    //set the client with that token
+    //try to get user data
+    NSString *apiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"apiToken"];
+    [[[Session sharedInstance] client] setApiToken:apiToken];
+    
+    if ([[[Session sharedInstance] client] isUserLoggedIn]) {
+        [self populateDeviceData];
+    }
+    return;
+}
+
+
 - (IBAction)getTripDataButtponPressed:(id)sender {
     /*
      get last trip ID
@@ -122,6 +141,10 @@
      */
     //get the trips
     NSMutableArray* tripData = [[[[Session sharedInstance] client] getTripData] objectForKey:@"Data"];
+    if ([tripData count] < 1) {
+         self.tripDataTextView.text = @"No trip data";
+        return;
+    }
     //get the ID for the most recent trip
     NSString* tripIDString = [((NSMutableDictionary*)[tripData objectAtIndex:[tripData count]-1]) objectForKey:@"_id"];
     //get the events for that most recent trip
