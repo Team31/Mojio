@@ -33,12 +33,12 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    NSInteger currentDeviceindex = [[[Session sharedInstance] currentUser] currentDeviceIndex];
     //make home page title the first device nickname, if it exists
-    if (((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:0]))
+    if (((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:currentDeviceindex]))
     {
         // set current device to the first device
-        [[Session sharedInstance] currentUser].currentDevice = [[[[Session sharedInstance] currentUser] devices] objectAtIndex:0];
-        self.navigationItem.title = [[Session sharedInstance] currentUser].currentDevice.nickname;
+        self.navigationItem.title = ((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:currentDeviceindex]).nickname;
     }
     else
     {
@@ -219,7 +219,7 @@
     
     //[self populateDeviceData];
     //[[[Session sharedInstance] client] saveDeviceData:@"testing" andName:@"testworkedwork"];
-    [[[Session sharedInstance] client] storeMojio:@"testing" andKey:@"speedLimit" andValue:@"30"];
+    //[[[Session sharedInstance] client] storeMojio:@"SimTest_4MTBJaqrb0lkXia5CtSV" andKey:@"speedLimit" andValue:@"70"];
     //[[[Session sharedInstance] client] getStoredMojio:@"testing" andKey:@"test1"];
     //[[[Session sharedInstance] client] deleteStoredMojio:@"testing" andKey:@"test2"];
     //[[[Session sharedInstance] client] getStoredMojio:@"testing" andKey:@"test2"];

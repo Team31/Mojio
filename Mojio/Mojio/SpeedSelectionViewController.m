@@ -9,6 +9,7 @@
 #import "SpeedSelectionViewController.h"
 
 NSInteger speedS;
+Device* currentDevice;
 
 @interface SpeedSelectionViewController ()
 
@@ -30,6 +31,24 @@ NSInteger speedS;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.speedSeletion  = [[NSArray alloc]         initWithObjects: @"0",@"50",@"60",@"70",@"80",@"90",@"100",@"110",@"120",@"130",nil];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    // get current device's speed limit
+    NSInteger currentDeviceindex = [[[Session sharedInstance] currentUser] currentDeviceIndex];
+    currentDevice = ((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:currentDeviceindex]);
+    NSInteger speedLimit = currentDevice.speedLimit;
+    
+    // default to the currently set speed limit
+    if (speedLimit > 0) {
+        NSInteger row = (speedLimit-40)/10;
+        [_speedSelection selectRow:row inComponent:0 animated:NO];
+        self.speedSelected.text = [NSString stringWithFormat:@"%d",speedLimit];
+        speedS = speedLimit;
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -156,10 +175,15 @@ NSInteger speedS;
         self.speedSelected.text = @"Make Your Choice";
         _toggleUnite.selectedSegmentIndex = 0;
 }
+
 - (IBAction)setButtonPressed:(id)sender {
     //set the device's max speed to speedS
-    ((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:0]).speedLimit = speedS;
-
+    currentDevice.speedLimit = speedS;
+    
+    // send a request to mojio server to update the value
+    if (![[[Session sharedInstance] client] storeMojio:currentDevice.idNumber andKey:@"speedLimit" andValue:[NSString stringWithFormat:@"%d",speedS]]) {
+        NSLog(@"An error occurred during storing");
+    }
     
     [[self navigationController] popViewControllerAnimated:YES];
 }
