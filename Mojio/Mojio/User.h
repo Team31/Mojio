@@ -15,4 +15,7 @@
 @property (strong, nonatomic) NSString *username, *password;
 @property (strong, nonatomic) NSArray *devices;
 
+//TODO: not sure if current device should be stored in User or homeviewcontroller
+@property (strong, nonatomic) Device *currentDevice;
+
 @end

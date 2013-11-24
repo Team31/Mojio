@@ -34,9 +34,11 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     //make home page title the first device nickname, if it exists
-    if (((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:0]).nickname)
+    if (((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:0]))
     {
-        self.navigationItem.title = ((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:0]).nickname;
+        // set current device to the first device
+        [[Session sharedInstance] currentUser].currentDevice = [[[[Session sharedInstance] currentUser] devices] objectAtIndex:0];
+        self.navigationItem.title = [[Session sharedInstance] currentUser].currentDevice.nickname;
     }
     else
     {
