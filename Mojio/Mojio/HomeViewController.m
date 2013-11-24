@@ -71,14 +71,36 @@
     NSMutableArray* deviceList = [[NSMutableArray alloc] init];
     
     // device data returned from Mojio server
-    NSMutableArray* deviceData = [[[[Session sharedInstance] client] getDevices] objectForKey:@"Data"];
+    NSMutableArray* deviceDataReturned = [[[[Session sharedInstance] client] getDevices] objectForKey:@"Data"];
     
-    for (NSMutableDictionary *event in deviceData) {
-        // define each device: idNumber, speedLimit and nickname
+    NSString* speedLimitReturned = [[NSString alloc]init];
+    NSString* onOffReturned = [[NSString alloc]init];
+    
+    for (NSMutableDictionary *deviceData in deviceDataReturned) {
+        // define each device: idNumber, speedLimit, onOff and nickname
         Device *device = [[Device alloc] init];
-        device.speedLimit = 10;
-        device.idNumber = [event objectForKey:@"_id"];
-        device.nickname = [event objectForKey:@"Name"];
+        device.idNumber = [deviceData objectForKey:@"_id"];
+        device.nickname = [deviceData objectForKey:@"Name"];
+        
+        // get speed limit from Mojio server if defined, otherwise set speed limit to zero and onOff to off
+        speedLimitReturned = [[[Session sharedInstance] client] getStoredMojio:device.idNumber andKey:@"speedLimit"];
+        if (speedLimitReturned != nil) {
+            // remove double quotes from the start and end of the string so the integer conversion works properly
+            speedLimitReturned = [speedLimitReturned substringFromIndex:1];
+            speedLimitReturned = [speedLimitReturned substringToIndex:[speedLimitReturned length] - 1];
+            device.speedLimit = [speedLimitReturned intValue];
+            
+            // get on off status of the device if speed limit is set
+            onOffReturned = [[[Session sharedInstance] client] getStoredMojio:device.idNumber andKey:@"onOff"];
+            if ([onOffReturned isEqualToString:@"\"TRUE\""]){
+                device.onOff = true;
+            } else {
+                device.onOff = false;
+            }
+        } else {
+            device.speedLimit = 0;
+            device.onOff = false;
+        }
         
         // and add it to deviceList
         [deviceList addObject:device];
@@ -86,36 +108,12 @@
     User *userOne = [[User alloc] init];
     [userOne setUsername:@"TestUserName"];
     [userOne setDevices:deviceList];
-    //start session singlton
+    //start session singleton
     [[Session sharedInstance] setCurrentUser:userOne];
     
     //refresh the homepage title for the new device downloaded
     [self viewDidAppear:true];
     
-}
-
-- (void)makeTestData{
-    //make some test devices
-    Device *deviceOne = [[Device alloc] init];
-    deviceOne.speedLimit = 60;
-    deviceOne.idNumber = @"12345";
-    deviceOne.nickname = @"Red Car";
-    Device *deviceTwo = [[Device alloc] init];
-    deviceTwo.speedLimit = 70;
-    deviceTwo.idNumber = @"12345";
-    deviceTwo.nickname = @"Blue Car";
-    Device *deviceThree = [[Device alloc] init];
-    deviceThree.speedLimit = 80;
-    deviceThree.idNumber = @"12345";
-    deviceThree.nickname = @"Green Car";
-    
-    //make test user
-    User *userOne = [[User alloc] init];
-    [userOne setUsername:@"TestUserName"];
-    [userOne setDevices:[[NSArray alloc] initWithObjects:deviceOne, deviceTwo, deviceThree, nil]];
-    //start session singlton
-    [[Session sharedInstance] setCurrentUser:userOne];
-
 }
 
 - (void)attemptUserLogin{
@@ -132,7 +130,7 @@
 }
 
 
-- (IBAction)getTripDataButtponPressed:(id)sender {
+- (IBAction)getTripDataButtonPressed:(id)sender {
     /*
      get last trip ID
      get events for last trip
@@ -237,9 +235,9 @@
     NSString* deviceString = [NSString stringWithFormat:@"device: %@", deviceDict];
     self.userDataTextView.text = deviceString;*/
     
-    [self populateDeviceData];
+    //[self populateDeviceData];
     //[[[Session sharedInstance] client] saveDeviceData:@"testing" andName:@"testworkedwork"];
-    //[[[Session sharedInstance] client] storeMojio:@"testing" andKey:@"test2" andValue:@"work2"];
+    [[[Session sharedInstance] client] storeMojio:@"testing" andKey:@"speedLimit" andValue:@"30"];
     //[[[Session sharedInstance] client] getStoredMojio:@"testing" andKey:@"test1"];
     //[[[Session sharedInstance] client] deleteStoredMojio:@"testing" andKey:@"test2"];
     //[[[Session sharedInstance] client] getStoredMojio:@"testing" andKey:@"test2"];

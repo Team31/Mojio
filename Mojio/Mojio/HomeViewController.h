@@ -20,7 +20,7 @@
 - (IBAction)SpeedSelectionButtonPressed:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextView *tripDataTextView;
 
-- (IBAction)getTripDataButtponPressed:(id)sender;
+- (IBAction)getTripDataButtonPressed:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *getUserData;
 @property (weak, nonatomic) IBOutlet UITextView *userDataTextView;
 - (IBAction)getUserDataButtonPressed:(id)sender;
