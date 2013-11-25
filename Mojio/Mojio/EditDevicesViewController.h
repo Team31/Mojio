@@ -10,8 +10,11 @@
 #import "Device.h"
 #import "Session.h"
 
-@interface EditDevicesViewController : UITableViewController <UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
+@interface EditDevicesViewController : UIViewController
 
 @property (weak, nonatomic) Device *device;
+@property (weak, nonatomic) IBOutlet UITextField *idTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *nicknameTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *speedLimitTextfield;
 
 @end

@@ -217,7 +217,7 @@
     NSString* deviceString = [NSString stringWithFormat:@"device: %@", deviceDict];
     self.userDataTextView.text = deviceString;*/
     
-    //[self populateDeviceData];
+    [self populateDeviceData];
     //[[[Session sharedInstance] client] saveDeviceData:@"testing" andName:@"testworkedwork"];
     //[[[Session sharedInstance] client] storeMojio:@"SimTest_4MTBJaqrb0lkXia5CtSV" andKey:@"speedLimit" andValue:@"70"];
     //[[[Session sharedInstance] client] getStoredMojio:@"testing" andKey:@"test1"];
