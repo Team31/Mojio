@@ -203,7 +203,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5JT-C7-612">
-                                <rect key="frame" x="72" y="248" width="176" height="72"/>
+                                <rect key="frame" x="72" y="154" width="176" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Speed Selection">
@@ -231,18 +231,8 @@
                                     <action selector="getTripDataButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="A7b-ev-MwG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZf-hT-DVt">
-                                <rect key="frame" x="117" y="100" width="86" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="getUserData">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="getUserDataButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Czl-f1-cXJ"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgA-Gu-JQt">
-                                <rect key="frame" x="40" y="128" width="240" height="128"/>
+                                <rect key="frame" x="40" y="128" width="240" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -254,7 +244,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="wvR-dE-K3c"/>
                     <connections>
-                        <outlet property="getUserData" destination="AZf-hT-DVt" id="l7W-d8-l3z"/>
                         <outlet property="speedSeleectionButton" destination="5JT-C7-612" id="WU5-xm-owP"/>
                         <outlet property="tripDataTextView" destination="BLW-Wg-lLI" id="siD-i4-wTQ"/>
                         <outlet property="userDataTextView" destination="hgA-Gu-JQt" id="ZQN-tG-45j"/>

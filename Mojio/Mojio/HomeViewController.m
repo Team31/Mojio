@@ -18,9 +18,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //Check if a user is currently logged in, pull data if they are
-    [self attemptUserLogin];
-    
     
     //set the navigtion bar left and right buttons
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Devices" style:UIBarButtonItemStylePlain target:self action:@selector(manageDevicesTapped)];
@@ -31,8 +28,10 @@
     
 }
 
--(void)viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
+    [self attemptUserLogin];
+
     NSInteger currentDeviceindex = [[[Session sharedInstance] currentUser] currentDeviceIndex];
     //make home page title the first device nickname, if it exists
     if (((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:currentDeviceindex]))
@@ -44,7 +43,8 @@
     {
         self.navigationItem.title = @"Home";
     }
-
+    //Check if a user is currently logged in, pull data if they are
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -217,7 +217,7 @@
     NSString* deviceString = [NSString stringWithFormat:@"device: %@", deviceDict];
     self.userDataTextView.text = deviceString;*/
     
-    [self populateDeviceData];
+    //[self populateDeviceData];
     //[[[Session sharedInstance] client] saveDeviceData:@"testing" andName:@"testworkedwork"];
     //[[[Session sharedInstance] client] storeMojio:@"SimTest_4MTBJaqrb0lkXia5CtSV" andKey:@"speedLimit" andValue:@"70"];
     //[[[Session sharedInstance] client] getStoredMojio:@"testing" andKey:@"test1"];

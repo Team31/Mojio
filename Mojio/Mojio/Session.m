@@ -37,6 +37,7 @@
         self.APIToken = response;
         self.client.apiToken = response;
         [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"apiToken"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         //TODO: I think its redundant for us to set two apiTokens
         //TODO: apitoken should persist, it gets reset on every app launch now
         return true;
