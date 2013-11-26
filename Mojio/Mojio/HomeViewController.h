@@ -12,6 +12,7 @@
 #import "LoginViewController.h"
 #import "ManageDevicesViewController.h"
 #import "Session.h"
+#import "Device.h"
 
 
 @interface HomeViewController : UIViewController
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *getUserData;
 @property (weak, nonatomic) IBOutlet UITextView *userDataTextView;
 - (IBAction)getUserDataButtonPressed:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *currentSpeedLimit;
 
 
 @end

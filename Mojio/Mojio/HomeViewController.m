@@ -7,8 +7,14 @@
 //
 
 #import "HomeViewController.h"
+#import "Reachability.h"
+
+Device* currentDevice;
 
 @interface HomeViewController ()
+{
+    Reachability *internetReachableFoo;
+}
 @property (strong, nonatomic) UIStoryboard *storyBoard;
 
 @end
@@ -25,7 +31,7 @@
     
     //get main storyboard, we will instantiate viewControllers from this
     self.storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    
+    [self testInternetConnection];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -38,6 +44,9 @@
     {
         // set current device to the first device
         self.navigationItem.title = ((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:currentDeviceindex]).nickname;
+        NSInteger currentDeviceindex = [[[Session sharedInstance] currentUser] currentDeviceIndex];
+        currentDevice = ((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:currentDeviceindex]);
+        self.currentSpeedLimit.text = [NSString stringWithFormat:@"%i",currentDevice.speedLimit];
     }
     else
     {
@@ -224,5 +233,30 @@
     //[[[Session sharedInstance] client] deleteStoredMojio:@"testing" andKey:@"test2"];
     //[[[Session sharedInstance] client] getStoredMojio:@"testing" andKey:@"test2"];
 
+}
+
+- (void)testInternetConnection
+{
+    internetReachableFoo = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    // Internet is reachable
+    internetReachableFoo.reachableBlock = ^(Reachability*reach)
+    {
+        // Update the UI on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Yayyy, we have the interwebs!");
+        });
+    };
+    
+    // Internet is not reachable
+    internetReachableFoo.unreachableBlock = ^(Reachability*reach)
+    {
+        // Update the UI on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Someone broke the internet :(");
+        });
+    };
+    
+    [internetReachableFoo startNotifier];
 }
 @end

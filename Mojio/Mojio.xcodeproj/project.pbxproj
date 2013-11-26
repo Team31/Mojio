@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FC9DFD41844245700DC0FA2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC9DFD21844245700DC0FA2 /* Reachability.m */; };
 		5254932C18418EF1003B1009 /* mojioIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5254932B18418EF1003B1009 /* mojioIcon.png */; };
 		525E74E2183C1CA6002C0B70 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525E74E1183C1CA6002C0B70 /* CoreLocation.framework */; };
 		52AA98EF1835CB7C00577E0B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AA98EE1835CB7C00577E0B /* User.m */; };
@@ -46,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2FC9DFD21844245700DC0FA2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		2FC9DFD31844245700DC0FA2 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		5254932B18418EF1003B1009 /* mojioIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mojioIcon.png; sourceTree = "<group>"; };
 		525E74E1183C1CA6002C0B70 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		52AA98ED1835CB7C00577E0B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -149,6 +152,8 @@
 		52AA98EC1835CB6600577E0B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2FC9DFD21844245700DC0FA2 /* Reachability.m */,
+				2FC9DFD31844245700DC0FA2 /* Reachability.h */,
 				52AA98ED1835CB7C00577E0B /* User.h */,
 				52AA98EE1835CB7C00577E0B /* User.m */,
 				52AA98F01835CB8700577E0B /* Device.h */,
@@ -346,6 +351,7 @@
 				52B410751835765E003AFC3E /* main.m in Sources */,
 				52AA98F51835CB9100577E0B /* Session.m in Sources */,
 				52B410A2183577BE003AFC3E /* SpeedSelectionViewController.m in Sources */,
+				2FC9DFD41844245700DC0FA2 /* Reachability.m in Sources */,
 				52B410A51835818B003AFC3E /* MojioClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

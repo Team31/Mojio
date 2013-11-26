@@ -45,7 +45,7 @@ Device* currentDevice;
     if (speedLimit > 0) {
         NSInteger row = (speedLimit-40)/10;
         [_speedSelection selectRow:row inComponent:0 animated:NO];
-        self.speedSelected.text = [NSString stringWithFormat:@"%d",speedLimit];
+        self.speedSelected.text = [NSString stringWithFormat:@"%ld",(long)speedLimit];
         speedS = speedLimit;
     }
 
