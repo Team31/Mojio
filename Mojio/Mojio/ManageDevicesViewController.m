@@ -37,6 +37,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.tableView reloadData];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:nil];
 }
 
 - (void)didReceiveMemoryWarning

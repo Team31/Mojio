@@ -32,6 +32,7 @@ Device* currentDevice;
     //get main storyboard, we will instantiate viewControllers from this
     self.storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     [self testInternetConnection];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -153,6 +154,7 @@ Device* currentDevice;
     [dateFormat setDateFormat:@"yyyy-mm-dd'T'HH:mm:ss.SSS'Z'"];
     
     for (NSMutableDictionary *event in tripEventsArray) {
+        
         if ([previousEvent objectForKey:@"Location"] && [event objectForKey:@"Location"]) {
             //convert string to time and get the difference between events
             NSDate *eventDate = [dateFormat dateFromString:[event objectForKey:@"Time"]];
