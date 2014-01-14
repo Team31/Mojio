@@ -44,4 +44,14 @@
     }
     
 }
+
+- (NSMutableDictionary*)createMojioDictionary{
+    NSMutableDictionary *mojioData = [[NSMutableDictionary alloc] init];
+    [mojioData setObject:[NSString stringWithFormat:@"%d",self.speedLimit] forKey:@"speed"];
+    [mojioData setObject:[NSString stringWithFormat:@"%@", self.onOff ? @"YES" : @"NO"] forKey:@"onOrOff"];
+    [mojioData setObject:self.nickname forKey:@"nickName"];
+    
+    return mojioData;
+}
+
 @end

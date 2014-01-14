@@ -217,6 +217,7 @@
     NSMutableDictionary *mojioData = [[NSMutableDictionary alloc] init];
     [mojioData setObject:@"70" forKey:@"speed"];
     [mojioData setObject:@"1" forKey:@"onOrOff"];
+    [mojioData setObject:@"testing" forKey:@"nickName"];
 
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mojioData                                                  options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
                                                      error:nil];
