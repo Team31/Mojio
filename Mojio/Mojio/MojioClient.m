@@ -213,6 +213,27 @@
     return false;
 }
 
+-(NSString*)DictionaryToString:(NSDictionary*)inputDict{
+    NSMutableDictionary *mojioData = [[NSMutableDictionary alloc] init];
+    [mojioData setObject:@"70" forKey:@"speed"];
+    [mojioData setObject:@"1" forKey:@"onOrOff"];
+
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mojioData                                                  options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                     error:nil];
+
+    if (! jsonData) {
+        NSLog(@"Got an error");
+        return @"";
+    } else {
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+        NSString *escaped = [[jsonString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""]stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+        /*[self.storeMojio:@"testing" andKey:@"hello" andValue:[NSString stringWithFormat:@"%@",escaped]];*/
+        return escaped;
+    }
+}
+
 -(BOOL)storeMojio:(NSString*)deviceID andKey:(NSString*)key andValue:(NSString*)value{
     // store a key value pair for a device
     // use getStoredMojio with the deviceID key to grab the value
@@ -248,6 +269,7 @@
             return true;
         } else {
             return false;
+            NSLog(@"%@", returnString);
         }
         
     }

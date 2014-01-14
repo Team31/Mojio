@@ -22,6 +22,8 @@
 -(BOOL)isUserLoggedIn;
 
 // methods to store, get and delete values for a Mojio device
+-(NSString*)DictionaryToString:(NSDictionary*)inputDict;
+
 -(BOOL)storeMojio:(NSString*)deviceID andKey:(NSString*)key andValue:(NSString*)value;
 -(NSString*)getStoredMojio:(NSString*)deviceID andKey:(NSString*)key;
 -(BOOL)deleteStoredMojio:(NSString*)deviceID andKey:(NSString*)key;
