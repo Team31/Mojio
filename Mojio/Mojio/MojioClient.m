@@ -214,12 +214,7 @@
 }
 
 -(NSString*)DictionaryToString:(NSDictionary*)inputDict{
-    NSMutableDictionary *mojioData = [[NSMutableDictionary alloc] init];
-    [mojioData setObject:@"70" forKey:@"speed"];
-    [mojioData setObject:@"1" forKey:@"onOrOff"];
-    [mojioData setObject:@"testing" forKey:@"nickName"];
-
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mojioData                                                  options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:inputDict                                                  options:0//NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
                                                      error:nil];
 
     if (! jsonData) {
@@ -228,7 +223,7 @@
     } else {
         NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-        NSString *escaped = [[jsonString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""]stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        NSString *escaped = [[jsonString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""]stringByReplacingOccurrencesOfString:@"\n" withString:@"\\\\n"];
     
         /*[self.storeMojio:@"testing" andKey:@"hello" andValue:[NSString stringWithFormat:@"%@",escaped]];*/
         return escaped;
@@ -282,7 +277,7 @@
 }
 -(NSString*)getStoredMojio:(NSString*)deviceID andKey:(NSString*)key{
     if (self.apiToken) {
-        NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/mojios/%@/store/%@",deviceID, key];
+        NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/mojios/%@/store/%@",deviceID, @"deviceData"];
         NSURL *url = [NSURL URLWithString:str];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];

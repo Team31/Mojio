@@ -187,7 +187,7 @@ Device* currentDevice;
     NSString *mojioDataString = [[[Session sharedInstance] client] DictionaryToString:mojioData];
     
     // send a request to mojio server to update the value
-    if (![[[Session sharedInstance] client] storeMojio:currentDevice.idNumber andKey:@"speedLimit" andValue:mojioDataString]) {
+    if (![[[Session sharedInstance] client] storeMojio:currentDevice.idNumber andKey:@"deviceData" andValue:mojioDataString]) {
         NSLog(@"An error occurred during storing");
     }
     
