@@ -32,7 +32,10 @@ Device* currentDevice;
     //get main storyboard, we will instantiate viewControllers from this
     self.storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     [self testInternetConnection];
-    
+    self.mapView.showsUserLocation = YES; //show current location
+    self.mapView.mapType = MKMapTypeStandard;
+    self.mapView.delegate = self;
+ 
 }
 
 -(void)viewWillAppear:(BOOL)animated

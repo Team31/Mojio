@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "SpeedSelectionViewController.h"
 #import "LoginViewController.h"
@@ -15,7 +16,8 @@
 #import "Device.h"
 
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController <MKMapViewDelegate>
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
 
 @property (weak, nonatomic) IBOutlet UIButton *speedSeleectionButton;
 - (IBAction)SpeedSelectionButtonPressed:(id)sender;
