@@ -180,8 +180,14 @@ Device* currentDevice;
     //set the device's max speed to speedS
     currentDevice.speedLimit = speedS;
     
+    //get dict containing all the device data to store to Mojio server
+    NSMutableDictionary *mojioData = [[NSMutableDictionary alloc] init];
+    mojioData = [currentDevice createMojioDictionary];
+    
+    NSString *mojioDataString = [[[Session sharedInstance] client] DictionaryToString:mojioData];
+    
     // send a request to mojio server to update the value
-    if (![[[Session sharedInstance] client] storeMojio:currentDevice.idNumber andKey:@"speedLimit" andValue:[NSString stringWithFormat:@"%d",speedS]]) {
+    if (![[[Session sharedInstance] client] storeMojio:currentDevice.idNumber andKey:@"deviceData" andValue:mojioDataString]) {
         NSLog(@"An error occurred during storing");
     }
     

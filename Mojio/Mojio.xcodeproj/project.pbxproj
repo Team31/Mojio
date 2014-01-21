@@ -293,6 +293,13 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = team31;
 				TargetAttributes = {
+					52B410641835765E003AFC3E = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					52B410881835765E003AFC3E = {
 						TestTargetID = 52B410641835765E003AFC3E;
 					};
