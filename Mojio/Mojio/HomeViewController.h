@@ -16,7 +16,9 @@
 #import "Device.h"
 
 
-@interface HomeViewController : UIViewController <MKMapViewDelegate>
+@interface HomeViewController : UIViewController
+<MKMapViewDelegate>
+
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 
 @property (weak, nonatomic) IBOutlet UIButton *speedSeleectionButton;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="gK2-1v-5if">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="gK2-1v-5if">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -269,7 +269,7 @@
                     <navigationItem key="navigationItem" id="wvR-dE-K3c"/>
                     <connections>
                         <outlet property="currentSpeedLimit" destination="WMg-BD-do6" id="Zy2-BG-w85"/>
-                        <outlet property="mapView" destination="fOe-Vx-ov0" id="ggQ-vv-fFJ"/>
+                        <outlet property="mapView" destination="fOe-Vx-ov0" id="0SL-ZQ-wOY"/>
                         <outlet property="speedSeleectionButton" destination="5JT-C7-612" id="WU5-xm-owP"/>
                         <outlet property="tripDataTextView" destination="BLW-Wg-lLI" id="siD-i4-wTQ"/>
                     </connections>

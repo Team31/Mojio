@@ -10,6 +10,7 @@
 #import "Reachability.h"
 
 Device* currentDevice;
+//MKMapView *mapView;
 
 @interface HomeViewController ()
 {
@@ -32,10 +33,20 @@ Device* currentDevice;
     //get main storyboard, we will instantiate viewControllers from this
     self.storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     [self testInternetConnection];
-    self.mapView.showsUserLocation = YES; //show current location
+    //self.mapView.showsUserLocation = YES; //show current location
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.delegate = self;
- 
+    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 250)];
+    CLLocationCoordinate2D coord = {latitude: 49.25, longitude: -123.2};
+    MKCoordinateSpan span = {latitudeDelta: 0.1, longitudeDelta: 0.1};
+    MKCoordinateRegion region = {coord, span};
+    [self.mapView setRegion:region];
+    [self.view addSubview:self.mapView];
+    MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
+    myAnnotation.coordinate = CLLocationCoordinate2DMake(49.25, -123.2);
+    //myAnnotation.title = @"Matthews Pizza";
+    //myAnnotation.subtitle = @"Best Pizza in Town";
+    [self.mapView addAnnotation:myAnnotation];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -263,5 +274,49 @@ Device* currentDevice;
     };
     
     [internetReachableFoo startNotifier];
+}
+
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    id <MKAnnotation> annotation = [view annotation];
+    if ([annotation isKindOfClass:[MKPointAnnotation class]])
+    {
+        NSLog(@"Clicked Pizza Shop");
+    }
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Disclosure Pressed" message:@"Click Cancel to Go Back" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    [alertView show];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    // If it's the user location, just return nil.
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+        return nil;
+    
+    // Handle any custom annotations.
+    if ([annotation isKindOfClass:[MKPointAnnotation class]])
+    {
+        // Try to dequeue an existing pin view first.
+        MKAnnotationView *pinView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomPinAnnotationView"];
+        if (!pinView)
+        {
+            // If an existing pin view was not available, create one.
+            pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
+            pinView.canShowCallout = YES;
+            pinView.image = [UIImage imageNamed:@"pizza_slice_32.png"];
+            pinView.calloutOffset = CGPointMake(0, 32);
+            
+            // Add a detail disclosure button to the callout.
+            UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            pinView.rightCalloutAccessoryView = rightButton;
+            
+            // Add an image to the left callout.
+            UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pizza_slice_32.png"]];
+            pinView.leftCalloutAccessoryView = iconView;
+        } else {
+            pinView.annotation = annotation;
+        }
+        return pinView;
+    }
+    return nil;
 }
 @end
