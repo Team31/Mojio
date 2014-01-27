@@ -10,13 +10,13 @@
 #import "Reachability.h"
 
 Device* currentDevice;
-//MKMapView *mapView;
 
 @interface HomeViewController ()
 {
     Reachability *internetReachableFoo;
 }
 @property (strong, nonatomic) UIStoryboard *storyBoard;
+@property (strong, nonatomic) NSTimer *timer;
 
 @end
 
@@ -33,9 +33,8 @@ Device* currentDevice;
     //get main storyboard, we will instantiate viewControllers from this
     self.storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     [self testInternetConnection];
-    //self.mapView.showsUserLocation = YES; //show current location
-    self.mapView.mapType = MKMapTypeStandard;
-    self.mapView.delegate = self;
+    
+    //Map stuff
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 250)];
     CLLocationCoordinate2D coord = {latitude: 49.25, longitude: -123.2};
     MKCoordinateSpan span = {latitudeDelta: 0.1, longitudeDelta: 0.1};
@@ -47,7 +46,28 @@ Device* currentDevice;
     //myAnnotation.title = @"Matthews Pizza";
     //myAnnotation.subtitle = @"Best Pizza in Town";
     [self.mapView addAnnotation:myAnnotation];
-}
+
+    
+    //set userdefaults
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"lastCheckedTimestamp"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate dateWithTimeIntervalSince1970:0] forKey:@"lastCheckedTimestamp"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"speedViolations"])
+    {
+        NSArray *array = [[NSArray alloc] init];
+        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"speedViolations"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+
+    
+    //Start timer for checking new data
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self
+                                                    selector:@selector(getTripData) userInfo:nil repeats:YES];
+
+    
+    }
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -136,90 +156,12 @@ Device* currentDevice;
 }
 
 
-- (IBAction)getTripDataButtonPressed:(id)sender {
-    /*
-     get last trip ID
-     get events for last trip
-     calculate speed between each event
-     if speed > threshold then alert user of speed and time, maybe location
-     */
-    //get the trips
-    NSMutableArray* tripData = [[[[Session sharedInstance] client] getTripData] objectForKey:@"Data"];
-    if ([tripData count] < 1) {
-         self.tripDataTextView.text = @"No trip data";
-        return;
-    }
-    //get the ID for the most recent trip
-    NSString* tripIDString = [((NSMutableDictionary*)[tripData objectAtIndex:[tripData count]-1]) objectForKey:@"_id"];
-    //get the events for that most recent trip
-    NSMutableDictionary* tripEvents = [[[Session sharedInstance] client] getEventDataForTrip:tripIDString];
-    NSMutableArray* tripEventsArray = [tripEvents objectForKey:@"Data"];
-    //TODO: is this gaurunteed to be in order?
-   
-    //go through each event and calculate the speed between each event
-    //based on the timestamp and location
-    NSString *tripString = [NSString string];
-    NSMutableDictionary* previousEvent = [[NSMutableDictionary alloc] init];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    NSTimeInterval differenceInTime;
-    CLLocationDistance distance;
-    double speed, exceededSpeed = 0;
+- (void)getTripData {
 
-    [dateFormat setDateFormat:@"yyyy-mm-dd'T'HH:mm:ss.SSS'Z'"];
-    
-    for (NSMutableDictionary *event in tripEventsArray) {
-        
-        if ([previousEvent objectForKey:@"Location"] && [event objectForKey:@"Location"]) {
-            //convert string to time and get the difference between events
-            NSDate *eventDate = [dateFormat dateFromString:[event objectForKey:@"Time"]];
-            NSDate *previousEventDate = [dateFormat dateFromString:[previousEvent objectForKey:@"Time"]];
-            differenceInTime = [eventDate timeIntervalSinceDate:previousEventDate];
-            
-            //get locations and find distance between events
-            CLLocationDegrees previousLat = [[[previousEvent objectForKey:@"Location"] objectForKey:@"Lat"] doubleValue];
-            CLLocationDegrees previousLong =[[[previousEvent objectForKey:@"Location"] objectForKey:@"Lng"] doubleValue];
-            CLLocationDegrees eventLat =[[[event objectForKey:@"Location"] objectForKey:@"Lat"] doubleValue];
-            CLLocationDegrees eventLong =[[[event objectForKey:@"Location"] objectForKey:@"Lng"] doubleValue];
-            
-            CLLocation *locA = [[CLLocation alloc] initWithLatitude:previousLat longitude:previousLong];
-            CLLocation *locB = [[CLLocation alloc] initWithLatitude:eventLat longitude:eventLong];
-            //distance is in meters
-            distance = [locA distanceFromLocation:locB];
-            speed =(distance/differenceInTime)*3.6; //m/s to km/h
-            
-            //calculate speed between events
-            //write to the textfield
-            if (distance < 1000) {
-                tripString = [tripString stringByAppendingString:[NSString stringWithFormat:@"time: %f\n",differenceInTime]];
-                tripString = [tripString stringByAppendingString:[NSString stringWithFormat:@"distance: %f\n",distance]];
-                tripString = [tripString stringByAppendingString:[NSString stringWithFormat:@"speed: %f\n",(distance/differenceInTime)]];
-                
-                //just grab the last speeding speed for now to alert the user
-                if (speed > 120) {
-                    exceededSpeed = speed;
-                }
-
-            }
-            else{
-                 tripString = [tripString stringByAppendingString:@"A large value is here"];
-            }
-            
-        }
-        previousEvent = event;
-    }
-    
-    if (tripEvents)
-    {
-        self.tripDataTextView.text = tripString;
-    }
-    else
-    {
-        self.tripDataTextView.text = @"No api key, please login";
-    }
     //alert user of speeding
-    if (exceededSpeed > 0) {
+    if ([self hasSpeedingOcurred]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Speeding Alert"
-                                                        message:[NSString stringWithFormat:@"Vehicle reached %f km/h", exceededSpeed]
+                                                        message:@"Speeding has ocurred"
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
@@ -227,27 +169,121 @@ Device* currentDevice;
 
     }
 }
-- (IBAction)getUserDataButtonPressed:(id)sender {
-    /*NSMutableArray* userData = [[[[Session sharedInstance] client] getUserData] objectForKey:@"Data"];
-    NSMutableDictionary* userDict = [userData objectAtIndex:[userData count]-1];
+
+
+-(BOOL) hasSpeedingOcurred
+{
+    NSLog(@"check for speeding");
+    /*
+     get last trip ID
+     get events for last trip
+     calculate speed between each event
+     if speed > threshold then alert user of speed and time, maybe location
+     */
     
-    [userDict setValue:@"80" forKey:@"speed"];
-    NSString* userID = [userDict objectForKey:@"_id"];
+    //get the trips
+    NSMutableArray* tripData = [[[[Session sharedInstance] client] getTripData] objectForKey:@"Data"];
+    if ([tripData count] < 1) {
+       // self.tripDataTextView.text = @"No trip data";
+        return false;
+    }
+    //get the ID for the most recent trip
+    NSString* tripIDString = [((NSMutableDictionary*)[tripData objectAtIndex:[tripData count]-1]) objectForKey:@"_id"];
     
-    [[[Session sharedInstance] client] saveUserData:userDict AndID:userID];
+    //get the events for that most recent trip
+    NSMutableDictionary* tripEvents = [[[Session sharedInstance] client] getEventDataForTrip:tripIDString];
+    NSMutableArray* tripEventsArray = [tripEvents objectForKey:@"Data"];
+    //TODO: is this gaurunteed to be in order?
     
-    NSMutableArray* deviceData = [[[[Session sharedInstance] client] getDevices] objectForKey:@"Data"];
-    NSMutableDictionary* deviceDict = [deviceData objectAtIndex:[deviceData count]-1];
+    //get Current Deivce speed limit
+    NSInteger currentDeviceindex = [[[Session sharedInstance] currentUser] currentDeviceIndex];
+    currentDevice = ((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:currentDeviceindex]);
+    NSInteger deviceSpeedLimit = currentDevice.speedLimit;
     
-    NSString* deviceString = [NSString stringWithFormat:@"device: %@", deviceDict];
-    self.userDataTextView.text = deviceString;*/
+    //go through each event and calculate the speed between each event
+    //based on the timestamp and location
+    NSMutableDictionary* previousEvent = [[NSMutableDictionary alloc] init];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSTimeInterval differenceInTime;
+    CLLocationDistance distance;
+    double speed, exceededSpeed = 0;
+    //save the last event date, so you can start from there next time
+    NSDate *lastEventDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastCheckedTimestamp"];
     
-    //[self populateDeviceData];
-    //[[[Session sharedInstance] client] saveDeviceData:@"testing" andName:@"testworkedwork"];
-    //[[[Session sharedInstance] client] storeMojio:@"SimTest_4MTBJaqrb0lkXia5CtSV" andKey:@"speedLimit" andValue:@"70"];
-    //[[[Session sharedInstance] client] getStoredMojio:@"testing" andKey:@"test1"];
-    //[[[Session sharedInstance] client] deleteStoredMojio:@"testing" andKey:@"test2"];
-    //[[[Session sharedInstance] client] getStoredMojio:@"testing" andKey:@"test2"];
+    [dateFormat setDateFormat:@"yyyy-mm-dd'T'HH:mm:ss.SSS'Z'"];
+    
+    //Save values for speed Violation list
+    SpeedViolation *speedViolation = [[SpeedViolation alloc] init];
+    
+    for (NSMutableDictionary *event in tripEventsArray) {
+        
+        if ([previousEvent objectForKey:@"Location"] && [event objectForKey:@"Location"]) {
+            //convert string to time and get the difference between events
+            NSDate *eventDate = [dateFormat dateFromString:[event objectForKey:@"Time"]];
+            
+            //is the eventDate later in time than the last timestamp?
+            if ([eventDate compare:lastEventDate] == NSOrderedDescending) {
+
+                NSDate *previousEventDate = [dateFormat dateFromString:[previousEvent objectForKey:@"Time"]];
+                differenceInTime = [eventDate timeIntervalSinceDate:previousEventDate];
+                lastEventDate = eventDate;
+                
+                //get locations and find distance between events
+                CLLocationDegrees previousLat = [[[previousEvent objectForKey:@"Location"] objectForKey:@"Lat"] doubleValue];
+                CLLocationDegrees previousLong =[[[previousEvent objectForKey:@"Location"] objectForKey:@"Lng"] doubleValue];
+                CLLocationDegrees eventLat =[[[event objectForKey:@"Location"] objectForKey:@"Lat"] doubleValue];
+                CLLocationDegrees eventLong =[[[event objectForKey:@"Location"] objectForKey:@"Lng"] doubleValue];
+                
+                CLLocation *locA = [[CLLocation alloc] initWithLatitude:previousLat longitude:previousLong];
+                CLLocation *locB = [[CLLocation alloc] initWithLatitude:eventLat longitude:eventLong];
+                //distance is in meters
+                distance = [locA distanceFromLocation:locB];
+                speed =(distance/differenceInTime)*3.6; //m/s to km/h
+                
+                
+                //output for testing
+                NSLog([NSString stringWithFormat:@"Speed: %f", speed]);
+                NSLog([NSString stringWithFormat:@"Distance: %f", distance]);
+                NSLog([NSString stringWithFormat:@"%@",eventDate]);
+                
+
+
+                //calculate speed between events
+                //make sure distance isn't an error
+                if (distance < 1000) {
+                    //just grab the last speeding speed for now to alert the user
+                    
+                    if (speed > deviceSpeedLimit) {
+                        exceededSpeed = speed;
+                        speedViolation.speed = speed;
+                        speedViolation.location = locB;
+                        speedViolation.date = eventDate;
+                        
+                    }
+                    
+                }
+            }//is date after last timestamp
+        }
+        previousEvent = event;
+    }
+    
+    //save the last date from the trip
+    [[NSUserDefaults standardUserDefaults] setObject:lastEventDate forKey:@"lastCheckedTimestamp"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+
+    if (exceededSpeed > 0) {
+        //TODO: add the speed violation to the list
+        NSMutableArray *mutableArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"speedViolations"]];
+        [mutableArray addObject:@"New"];
+        NSArray *array = [NSArray arrayWithArray:mutableArray];
+        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"speedViolations"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+        
+        return true;
+    }
+    return false;
 
 }
 
@@ -274,6 +310,8 @@ Device* currentDevice;
     };
     
     [internetReachableFoo startNotifier];
+}
+- (IBAction)speedViolationsButtonPressed:(id)sender {
 }
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
@@ -319,4 +357,5 @@ Device* currentDevice;
     }
     return nil;
 }
+
 @end

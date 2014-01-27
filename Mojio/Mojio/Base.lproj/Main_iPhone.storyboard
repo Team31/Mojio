@@ -229,24 +229,6 @@
                                     <action selector="SpeedSelectionButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="EG8-vn-AJc"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Trip data" translatesAutoresizingMaskIntoConstraints="NO" id="BLW-Wg-lLI">
-                                <rect key="frame" x="20" y="369" width="280" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.87843143940000001" green="0.9215686917" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dng-kv-M0L">
-                                <rect key="frame" x="49" y="437" width="223" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.87843143940000001" green="0.9215686917" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
-                                <state key="normal" title="Get most recent trip data">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="getTripDataButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="A7b-ev-MwG"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Speed Limit:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7CL-7n-1YB">
                                 <rect key="frame" x="56" y="324" width="159" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -271,7 +253,6 @@
                         <outlet property="currentSpeedLimit" destination="WMg-BD-do6" id="Zy2-BG-w85"/>
                         <outlet property="mapView" destination="fOe-Vx-ov0" id="0SL-ZQ-wOY"/>
                         <outlet property="speedSeleectionButton" destination="5JT-C7-612" id="WU5-xm-owP"/>
-                        <outlet property="tripDataTextView" destination="BLW-Wg-lLI" id="siD-i4-wTQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
