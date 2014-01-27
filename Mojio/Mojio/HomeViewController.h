@@ -14,6 +14,7 @@
 #import "ManageDevicesViewController.h"
 #import "Session.h"
 #import "Device.h"
+#import "SpeedViolation.h"
 
 
 @interface HomeViewController : UIViewController
@@ -23,13 +24,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *speedSeleectionButton;
 - (IBAction)SpeedSelectionButtonPressed:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextView *tripDataTextView;
 
-- (IBAction)getTripDataButtonPressed:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *getUserData;
-@property (weak, nonatomic) IBOutlet UITextView *userDataTextView;
-- (IBAction)getUserDataButtonPressed:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *currentSpeedLimit;
+- (IBAction)speedViolationsButtonPressed:(id)sender;
 
 
 @end

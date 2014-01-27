@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		2F4470341885FBA600AD0E9B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4470331885FBA600AD0E9B /* MapKit.framework */; };
 		2FC9DFD41844245700DC0FA2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC9DFD21844245700DC0FA2 /* Reachability.m */; };
+		523D72051895F84100307D91 /* SpeedViolationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523D72041895F84100307D91 /* SpeedViolationViewController.m */; };
 		5254932C18418EF1003B1009 /* mojioIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5254932B18418EF1003B1009 /* mojioIcon.png */; };
 		525E74E2183C1CA6002C0B70 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525E74E1183C1CA6002C0B70 /* CoreLocation.framework */; };
+		52798BDC1895EA1D00A2F387 /* SpeedViolation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52798BDB1895EA1D00A2F387 /* SpeedViolation.m */; };
 		52AA98EF1835CB7C00577E0B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AA98EE1835CB7C00577E0B /* User.m */; };
 		52AA98F21835CB8700577E0B /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AA98F11835CB8700577E0B /* Device.m */; };
 		52AA98F51835CB9100577E0B /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AA98F41835CB9100577E0B /* Session.m */; };
@@ -51,8 +53,12 @@
 		2F4470331885FBA600AD0E9B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2FC9DFD21844245700DC0FA2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		2FC9DFD31844245700DC0FA2 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		523D72031895F84100307D91 /* SpeedViolationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedViolationViewController.h; sourceTree = "<group>"; };
+		523D72041895F84100307D91 /* SpeedViolationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedViolationViewController.m; sourceTree = "<group>"; };
 		5254932B18418EF1003B1009 /* mojioIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mojioIcon.png; sourceTree = "<group>"; };
 		525E74E1183C1CA6002C0B70 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		52798BDA1895EA1D00A2F387 /* SpeedViolation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedViolation.h; sourceTree = "<group>"; };
+		52798BDB1895EA1D00A2F387 /* SpeedViolation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedViolation.m; sourceTree = "<group>"; };
 		52AA98ED1835CB7C00577E0B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		52AA98EE1835CB7C00577E0B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		52AA98F01835CB8700577E0B /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
@@ -139,6 +145,8 @@
 				52AA98F71835D7F800577E0B /* ManageDevicesViewController.m */,
 				52AA98F91835DE9600577E0B /* EditDevicesViewController.h */,
 				52AA98FA1835DE9600577E0B /* EditDevicesViewController.m */,
+				523D72031895F84100307D91 /* SpeedViolationViewController.h */,
+				523D72041895F84100307D91 /* SpeedViolationViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -163,6 +171,8 @@
 				52AA98F11835CB8700577E0B /* Device.m */,
 				52AA98F31835CB9100577E0B /* Session.h */,
 				52AA98F41835CB9100577E0B /* Session.m */,
+				52798BDA1895EA1D00A2F387 /* SpeedViolation.h */,
+				52798BDB1895EA1D00A2F387 /* SpeedViolation.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -357,8 +367,10 @@
 				52B410821835765E003AFC3E /* HomeViewController.m in Sources */,
 				52AA98FB1835DE9600577E0B /* EditDevicesViewController.m in Sources */,
 				52B410791835765E003AFC3E /* AppDelegate.m in Sources */,
+				52798BDC1895EA1D00A2F387 /* SpeedViolation.m in Sources */,
 				52AA98F21835CB8700577E0B /* Device.m in Sources */,
 				52B410A8183582DB003AFC3E /* LoginViewController.m in Sources */,
+				523D72051895F84100307D91 /* SpeedViolationViewController.m in Sources */,
 				52B410751835765E003AFC3E /* main.m in Sources */,
 				52AA98F51835CB9100577E0B /* Session.m in Sources */,
 				52B410A2183577BE003AFC3E /* SpeedSelectionViewController.m in Sources */,
