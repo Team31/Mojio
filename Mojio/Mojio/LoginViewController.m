@@ -60,4 +60,9 @@
         self.StatusLabel.text = @"No valid username or password input";
     }
 }
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
 @end

@@ -103,8 +103,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F4470341885FBA600AD0E9B /* MapKit.framework in Frameworks */,
 				525E74E2183C1CA6002C0B70 /* CoreLocation.framework in Frameworks */,
+				2F4470341885FBA600AD0E9B /* MapKit.framework in Frameworks */,
 				52B4106B1835765E003AFC3E /* CoreGraphics.framework in Frameworks */,
 				52B4106D1835765E003AFC3E /* UIKit.framework in Frameworks */,
 				52B410691835765E003AFC3E /* Foundation.framework in Frameworks */,

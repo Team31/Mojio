@@ -49,4 +49,8 @@
     self.device.speedLimit = [self.speedLimitTextfield.text integerValue];
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event //hide the keyboard when user tap an empty space
+{
+    [self.view endEditing:YES];
+}
 @end
