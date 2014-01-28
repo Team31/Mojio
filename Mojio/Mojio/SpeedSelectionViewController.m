@@ -9,6 +9,7 @@
 #import "SpeedSelectionViewController.h"
 
 NSInteger speedS;
+Boolean onOffStatus;
 Device* currentDevice;
 
 @interface SpeedSelectionViewController ()
@@ -41,12 +42,20 @@ Device* currentDevice;
     currentDevice = ((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:currentDeviceindex]);
     NSInteger speedLimit = currentDevice.speedLimit;
     
-    // default to the currently set speed limit
     if (speedLimit > 0) {
+        // default speed limit to the one currently set for the device
         NSInteger row = (speedLimit-40)/10;
         [_speedSelection selectRow:row inComponent:0 animated:NO];
         self.speedSelected.text = [NSString stringWithFormat:@"%ld",(long)speedLimit];
         speedS = speedLimit;
+        
+        // default device on off status set
+        if (currentDevice.onOff == true) {
+            NSLog(@"true");
+            self.toggleOnOff.selectedSegmentIndex = 0;
+        } else {
+            self.toggleOnOff.selectedSegmentIndex = 1;
+        }
     }
 
 }
@@ -179,6 +188,7 @@ Device* currentDevice;
 - (IBAction)setButtonPressed:(id)sender {
     //set the device's max speed to speedS
     currentDevice.speedLimit = speedS;
+    currentDevice.onOff = onOffStatus;
     
     //get dict containing all the device data to store to Mojio server
     NSMutableDictionary *mojioData = [[NSMutableDictionary alloc] init];
@@ -194,6 +204,7 @@ Device* currentDevice;
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
+// Update speed limits displayed when unit toggle is changed
 - (IBAction)toggleChanged:(id)sender {
     if(_toggleUnite.selectedSegmentIndex == 0){
         self.speedSelected.text = @"Make Your Choice";
@@ -204,6 +215,17 @@ Device* currentDevice;
         self.speedSelected.text = @"Make Your Choice";
         self.speedSeletion  = [[NSArray alloc]         initWithObjects: @"0",@"30",@"40",@"50",@"60",@"70",@"80",@"90",@"100",@"110",nil];
         [self.speedSelection reloadAllComponents];
+    }
+}
+
+// Update the device on off status when toggle is changed
+- (IBAction)onOffChanged:(id)sender {
+    if(_toggleOnOff.selectedSegmentIndex == 0) {
+        // speed limit for device is on
+        onOffStatus = true;
+    } else {
+        // speed limit for device is off
+        onOffStatus = false;
     }
 }
 @end

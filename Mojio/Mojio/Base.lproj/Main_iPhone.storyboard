@@ -343,6 +343,9 @@
                                     <segment title="On"/>
                                     <segment title="Off"/>
                                 </segments>
+                                <connections>
+                                    <action selector="onOffChanged:" destination="MWu-uy-ggg" eventType="valueChanged" id="o4H-oU-EGD"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Units:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDH-yU-BCm">
                                 <rect key="frame" x="67" y="346" width="45" height="21"/>
@@ -359,6 +362,7 @@
                         <outlet property="setButton" destination="eOD-9o-v1Z" id="cig-fE-LmL"/>
                         <outlet property="speedSelected" destination="wuC-52-oZQ" id="uLL-cl-HEn"/>
                         <outlet property="speedSelection" destination="5yc-SR-llQ" id="GQe-XC-2hq"/>
+                        <outlet property="toggleOnOff" destination="6Ej-eL-KLy" id="RLn-Np-dCH"/>
                         <outlet property="toggleUnite" destination="VMz-v3-3Dc" id="S0u-22-CjI"/>
                     </connections>
                 </viewController>

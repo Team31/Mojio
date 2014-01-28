@@ -173,7 +173,7 @@ Device* currentDevice;
 
 -(BOOL) hasSpeedingOcurred
 {
-    NSLog(@"check for speeding");
+    //NSLog(@"check for speeding");
     /*
      get last trip ID
      get events for last trip

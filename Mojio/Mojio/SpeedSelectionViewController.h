@@ -21,4 +21,7 @@
 - (IBAction)setButtonPressed:(id)sender;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *toggleUnite;
 - (IBAction)toggleChanged:(id)sender;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *toggleOnOff;
+- (IBAction)onOffChanged:(id)sender;
+
 @end

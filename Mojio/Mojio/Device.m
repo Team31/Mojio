@@ -39,7 +39,7 @@
             self.speedLimit = [speedLimitReturned intValue];
             
             // get on off status of the device if speed limit is set
-            speedLimitReturned = [NSString stringWithFormat:@"\"%@\"",[json objectForKey:@"onOrOff"]];
+            onOffReturned = [NSString stringWithFormat:@"\"%@\"",[json objectForKey:@"onOrOff"]];
             if ([onOffReturned isEqualToString:@"\"ON\""]){
                 self.onOff = true;
             } else {
