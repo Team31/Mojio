@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "SpeedSelectionViewController.h"
+#import "SpeedViolationViewController.h"
 #import "LoginViewController.h"
 #import "ManageDevicesViewController.h"
 #import "Session.h"

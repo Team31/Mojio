@@ -312,7 +312,12 @@ Device* currentDevice;
     [internetReachableFoo startNotifier];
 }
 - (IBAction)speedViolationsButtonPressed:(id)sender {
+    UIViewController *speedViolationViewController = (SpeedViolationViewController *)[self.storyBoard instantiateViewControllerWithIdentifier:@"SpeedViolationViewController"];
+    [self.navigationController pushViewController:speedViolationViewController animated:true];
 }
+
+
+#pragma mark MapView
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     id <MKAnnotation> annotation = [view annotation];
