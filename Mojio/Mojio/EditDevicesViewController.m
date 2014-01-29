@@ -47,6 +47,17 @@
     self.device.idNumber = self.idTextfield.text;
     self.device.nickname = self.nicknameTextfield.text;
     self.device.speedLimit = [self.speedLimitTextfield.text integerValue];
+    
+    //get dict containing all the device data to store to Mojio server
+    NSMutableDictionary *mojioData = [[NSMutableDictionary alloc] init];
+    mojioData = [self.device createMojioDictionary];
+    
+    NSString *mojioDataString = [[[Session sharedInstance] client] DictionaryToString:mojioData];
+    
+    // send a request to mojio server to update the value
+    if (![[[Session sharedInstance] client] storeMojio:self.device.idNumber andKey:@"deviceData" andValue:mojioDataString]) {
+        NSLog(@"An error occurred during storing");
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event //hide the keyboard when user tap an empty space

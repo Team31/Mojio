@@ -123,10 +123,10 @@ Device* currentDevice;
         // define each device: idNumber, speedLimit, onOff and nickname
         Device *device = [[Device alloc] init];
         [device setIdNumber:[deviceData objectForKey:@"_id"]];
-        [device setNickname:[deviceData objectForKey:@"Name"]];
         
-        // set the device speed limit and on/off status
-        [device setDeviceSpeedLimitData];
+        if( [device setDeviceData] == false || [device.nickname length] == 0) {
+            [device setNickname:[deviceData objectForKey:@"Name"]];
+        }
         
         // and add it to deviceList
         [deviceList addObject:device];

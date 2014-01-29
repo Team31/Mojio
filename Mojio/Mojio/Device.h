@@ -16,7 +16,7 @@
 
 @property NSDictionary *mojioData;
 
-- (void)setDeviceSpeedLimitData;
+- (Boolean)setDeviceData;
 
 // creates a dictionary containing the Mojio <nickname>, <speedLimit> and speed limit <onOff> status
 - (NSMutableDictionary*)createMojioDictionary;

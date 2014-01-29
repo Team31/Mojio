@@ -11,16 +11,20 @@
 
 @implementation Device
 
-- (void)setDeviceSpeedLimitData{
-    // if the device id is set, gets the device speed limit and on off status from Mojio server and sets them
+
+// returns true if device data is populated from Mojio server using our data
+// returns false otherwise
+- (Boolean)setDeviceData{
+    // if the device id is set, gets the device nickname, speed limit and on off status from Mojio server and sets them
     if (self.idNumber != nil) {
-        // get speed limit from Mojio server if defined, otherwise set speed limit to zero and onOff to off
         NSString* deviceData = [[NSString alloc]init];
         NSString* speedLimitReturned = [[NSString alloc]init];
         NSString* onOffReturned = [[NSString alloc]init];
+        NSString* nickname = [[NSString alloc] init];
         
         deviceData = [[[Session sharedInstance] client] getStoredMojio:self.idNumber andKey:@"deviceData"];
         
+        // get speed limit from Mojio server if defined, otherwise set speed limit to zero and onOff to off
         // unescape any escaped characters
         NSString *unescaped = [[deviceData stringByReplacingOccurrencesOfString:@"\\\"" withString:@"\""]stringByReplacingOccurrencesOfString:@"\\\\n" withString:@"\n"];
         
@@ -45,14 +49,31 @@
             } else {
                 self.onOff = false;
             }
+            
+            // if a device nickname for our app is set-use it, otherwise use the nickname from the Mojio device
+            nickname = [json objectForKey:@"nickname"];
+            
+            if ([nickname length] == 0 || [nickname isEqualToString:(@"(null)")]) {
+                self.nickname = @"";
+                return false;
+            } else {
+                self.nickname = nickname;
+            }
+            
+            
+            return true;
         } else {
             // default to speed limit of zero and false
             self.speedLimit = 0;
             self.onOff = false;
+            self.nickname = @"";
+            
+            return false;
         }
-        
     } else {
         NSLog(@"device id not set");
+        
+        return false;
     }
     
 }
@@ -61,7 +82,7 @@
     NSMutableDictionary *mojioData = [[NSMutableDictionary alloc] init];
     [mojioData setObject:[NSString stringWithFormat:@"%d",self.speedLimit] forKey:@"speed"];
     [mojioData setObject:[NSString stringWithFormat:@"%@", self.onOff ? @"ON" : @"OFF"] forKey:@"onOrOff"];
-    [mojioData setObject:self.nickname forKey:@"nickName"];
+    [mojioData setObject:self.nickname forKey:@"nickname"];
     
     return mojioData;
 }
