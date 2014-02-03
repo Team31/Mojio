@@ -213,7 +213,7 @@ Device* currentDevice;
     [dateFormat setDateFormat:@"yyyy-mm-dd'T'HH:mm:ss.SSS'Z'"];
     
     //Save values for speed Violation list
-    SpeedViolation *speedViolation = [[SpeedViolation alloc] init];
+    NSMutableDictionary *violationDict = [[NSMutableDictionary alloc] init];
     
     for (NSMutableDictionary *event in tripEventsArray) {
         
@@ -255,10 +255,11 @@ Device* currentDevice;
                     
                     if (speed > deviceSpeedLimit) {
                         exceededSpeed = speed;
-                        speedViolation.speed = speed;
-                        speedViolation.location = locB;
-                        speedViolation.date = eventDate;
-                        
+                      //TODO: set speed violation data?
+                        [violationDict setObject:[dateFormat stringFromDate:eventDate] forKey:@"Date"];
+                        [violationDict setObject:[NSString stringWithFormat:@"%.f",speed] forKey:@"Speed"];
+                        [violationDict setObject:[NSString stringWithFormat:@"%f",eventLat] forKey:@"Latitude"];
+                        [violationDict setObject:[NSString stringWithFormat:@"%f",eventLong] forKey:@"Longitude"];
                     }
                     
                 }
@@ -275,7 +276,7 @@ Device* currentDevice;
     if (exceededSpeed > 0) {
         //TODO: add the speed violation to the list
         NSMutableArray *mutableArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"speedViolations"]];
-        [mutableArray addObject:@"New"];
+        [mutableArray addObject:violationDict];
         NSArray *array = [NSArray arrayWithArray:mutableArray];
         [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"speedViolations"];
         [[NSUserDefaults standardUserDefaults] synchronize];

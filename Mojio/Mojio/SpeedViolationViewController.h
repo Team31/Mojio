@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SpeedViolationViewController : UIViewController
+@interface SpeedViolationViewController : UIViewController <UITableViewDelegate>
+@property (strong, nonatomic) NSArray *violationsArray;
 
 @end
