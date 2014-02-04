@@ -10,14 +10,17 @@ When I touch the button marked "Login"
 Then I wait to see a navigation bar titled "Login"
 When I type "team31" into the "UsernameTextField" text field
 When I type "Teamthirty1" into the "PasswordTextField" text field
-When I wait for 1 second
+When I wait for 5 second
 When I touch the button marked "Login"
 Then I wait to not see a navigation bar titled "Login"
 When I touch the button marked "Speed Selection"
-And I touch "Mile"
-Then I wait for 1 second
-And I touch "70"
-Then I wait for 1 second
+#Then I wait for 5 second
+#And I touch "Mile"
+Then I wait for 5 second
+When I select 1nd row and lebel "60" in picker "speedPicker"
+#And I touch "30"
+Then I wait for 5 second
 And I touch "Set"
-Then I wait for 1 second
-And I wait to see "50" in the "currentSpeed" text field
+Then I wait for 5 second
+And I wait to see "20" in the "currentSpeed" text field
+#And I wait to see "50"
