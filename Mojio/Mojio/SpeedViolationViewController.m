@@ -71,8 +71,18 @@
     
     cell.backgroundColor = [UIColor purpleColor];
     
-    cell.textLabel.text = [((NSDictionary*)[self.violationsArray objectAtIndex:indexPath.row]) objectForKey:@"Date"];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ km/h", [((NSDictionary*)[self.violationsArray objectAtIndex:indexPath.row]) objectForKey:@"Speed"]];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-mm-dd'T'HH:mm:ss.SSS'Z'"];
+    
+    NSDateFormatter *dateFormatForDisplay = [[NSDateFormatter alloc] init];
+    [dateFormatForDisplay setDateFormat:@"MMM dd, HH:mm"];
+    
+    NSDate *date = [dateFormat dateFromString:[((NSDictionary*)[self.violationsArray objectAtIndex:(self.violationsArray.count - 1) - indexPath.row]) objectForKey:@"Date"]];
+    
+    
+    
+    cell.textLabel.text = [dateFormatForDisplay stringFromDate:date];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ km/h", [((NSDictionary*)[self.violationsArray objectAtIndex:(self.violationsArray.count - 1) - indexPath.row]) objectForKey:@"Speed"]];
     
     
     return cell;

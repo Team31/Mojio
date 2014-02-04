@@ -36,7 +36,7 @@
 {
     if (self.apiToken) {
         //TODO pagesize should be variable
-        NSString *str = @"http://sandbox.developer.moj.io/v1/trips/?pageSize=100";
+        NSString *str = @"http://sandbox.developer.moj.io/v1/trips/?pageSize=1000";
         NSURL *url = [NSURL URLWithString:str];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];

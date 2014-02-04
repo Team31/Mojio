@@ -15,7 +15,6 @@
 #import "ManageDevicesViewController.h"
 #import "Session.h"
 #import "Device.h"
-#import "SpeedViolation.h"
 
 
 @interface HomeViewController : UIViewController

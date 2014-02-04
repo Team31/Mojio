@@ -36,17 +36,8 @@ Device* currentDevice;
     
     //Map stuff
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 250)];
-    CLLocationCoordinate2D coord = {latitude: 49.25, longitude: -123.2};
-    MKCoordinateSpan span = {latitudeDelta: 0.1, longitudeDelta: 0.1};
-    MKCoordinateRegion region = {coord, span};
-    [self.mapView setRegion:region];
     [self.view addSubview:self.mapView];
-    MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
-    myAnnotation.coordinate = CLLocationCoordinate2DMake(49.25, -123.2);
-    //myAnnotation.title = @"Matthews Pizza";
-    //myAnnotation.subtitle = @"Best Pizza in Town";
-    [self.mapView addAnnotation:myAnnotation];
-
+   
     
     //set userdefaults
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"lastCheckedTimestamp"])
@@ -60,14 +51,22 @@ Device* currentDevice;
         [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"speedViolations"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    if (![[NSUserDefaults standardUserDefaults] doubleForKey:@"lastLatitude"])
+    {
+        [[NSUserDefaults standardUserDefaults] setDouble:49.25 forKey:@"lastLatitude"];
+        [[NSUserDefaults standardUserDefaults] setDouble:-123.2 forKey:@"lastLongitude"];
+        
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 
-    
+    [self updateMap];
+
     //Start timer for checking new data
     self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self
-                                                    selector:@selector(getTripData) userInfo:nil repeats:YES];
+                                                    selector:@selector(checkTripData) userInfo:nil repeats:YES];
 
     
-    }
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -95,6 +94,27 @@ Device* currentDevice;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+-(void)updateMap
+{
+    double lastLatitude = [[NSUserDefaults standardUserDefaults] doubleForKey:@"lastLatitude"];
+    double lastLongitude = [[NSUserDefaults standardUserDefaults] doubleForKey:@"lastLongitude"];
+    
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    
+    CLLocationCoordinate2D coord = {latitude: lastLatitude, longitude: lastLongitude};
+    MKCoordinateSpan span = {latitudeDelta: 0.01, longitudeDelta: 0.01};
+    MKCoordinateRegion region = {coord, span};
+    [self.mapView setRegion:region];
+    MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
+    myAnnotation.coordinate = CLLocationCoordinate2DMake(lastLatitude, lastLongitude);
+    //myAnnotation.title = @"Matthews Pizza";
+    //myAnnotation.subtitle = @"Best Pizza in Town";
+    [self.mapView addAnnotation:myAnnotation];
+
+    
 }
 
 - (IBAction)SpeedSelectionButtonPressed:(id)sender {
@@ -156,7 +176,7 @@ Device* currentDevice;
 }
 
 
-- (void)getTripData {
+- (void)checkTripData {
 
     //alert user of speeding
     if ([self hasSpeedingOcurred]) {
@@ -168,12 +188,13 @@ Device* currentDevice;
         [alert show];
 
     }
+    [self updateMap];
 }
 
 
 -(BOOL) hasSpeedingOcurred
 {
-    //NSLog(@"check for speeding");
+    NSLog(@"check for speeding");
     /*
      get last trip ID
      get events for last trip
@@ -228,41 +249,49 @@ Device* currentDevice;
                 differenceInTime = [eventDate timeIntervalSinceDate:previousEventDate];
                 lastEventDate = eventDate;
                 
-                //get locations and find distance between events
-                CLLocationDegrees previousLat = [[[previousEvent objectForKey:@"Location"] objectForKey:@"Lat"] doubleValue];
-                CLLocationDegrees previousLong =[[[previousEvent objectForKey:@"Location"] objectForKey:@"Lng"] doubleValue];
-                CLLocationDegrees eventLat =[[[event objectForKey:@"Location"] objectForKey:@"Lat"] doubleValue];
-                CLLocationDegrees eventLong =[[[event objectForKey:@"Location"] objectForKey:@"Lng"] doubleValue];
                 
-                CLLocation *locA = [[CLLocation alloc] initWithLatitude:previousLat longitude:previousLong];
-                CLLocation *locB = [[CLLocation alloc] initWithLatitude:eventLat longitude:eventLong];
-                //distance is in meters
-                distance = [locA distanceFromLocation:locB];
-                speed =(distance/differenceInTime)*3.6; //m/s to km/h
+                    //get locations and find distance between events
+                    CLLocationDegrees previousLat = [[[previousEvent objectForKey:@"Location"] objectForKey:@"Lat"] doubleValue];
+                    CLLocationDegrees previousLong =[[[previousEvent objectForKey:@"Location"] objectForKey:@"Lng"] doubleValue];
                 
-                
-                //output for testing
-                NSLog([NSString stringWithFormat:@"Speed: %f", speed]);
-                NSLog([NSString stringWithFormat:@"Distance: %f", distance]);
-                NSLog([NSString stringWithFormat:@"%@",eventDate]);
-                
-
-
-                //calculate speed between events
-                //make sure distance isn't an error
-                if (distance < 1000) {
-                    //just grab the last speeding speed for now to alert the user
+               
                     
-                    if (speed > deviceSpeedLimit) {
-                        exceededSpeed = speed;
-                      //TODO: set speed violation data?
-                        [violationDict setObject:[dateFormat stringFromDate:eventDate] forKey:@"Date"];
-                        [violationDict setObject:[NSString stringWithFormat:@"%.f",speed] forKey:@"Speed"];
-                        [violationDict setObject:[NSString stringWithFormat:@"%f",eventLat] forKey:@"Latitude"];
-                        [violationDict setObject:[NSString stringWithFormat:@"%f",eventLong] forKey:@"Longitude"];
+                    CLLocationDegrees eventLat =[[[event objectForKey:@"Location"] objectForKey:@"Lat"] doubleValue];
+                    CLLocationDegrees eventLong =[[[event objectForKey:@"Location"] objectForKey:@"Lng"] doubleValue];
+                    
+                    CLLocation *locA = [[CLLocation alloc] initWithLatitude:previousLat longitude:previousLong];
+                    CLLocation *locB = [[CLLocation alloc] initWithLatitude:eventLat longitude:eventLong];
+                    //distance is in meters
+                    distance = [locA distanceFromLocation:locB];
+                    speed =(distance/differenceInTime)*3.6; //m/s to km/h
+                    
+                    //save location
+                    [[NSUserDefaults standardUserDefaults] setDouble:eventLat forKey:@"lastLatitude"];
+                    [[NSUserDefaults standardUserDefaults] setDouble:eventLong forKey:@"lastLongitude"];
+                    
+                    //output for testing
+                    NSLog([NSString stringWithFormat:@"Speed: %f", speed]);
+                    NSLog([NSString stringWithFormat:@"Distance: %f", distance]);
+                    NSLog([NSString stringWithFormat:@"%@",eventDate]);
+                    
+
+
+                    //calculate speed between events
+                    //make sure distance isn't an error
+                    if (distance < 1000) {
+                        //just grab the last speeding speed for now to alert the user
+                        
+                        if (speed > deviceSpeedLimit) {
+                            exceededSpeed = speed;
+                          //TODO: set speed violation data?
+                            [violationDict setObject:[dateFormat stringFromDate:eventDate] forKey:@"Date"];
+                            [violationDict setObject:[NSString stringWithFormat:@"%.f",speed] forKey:@"Speed"];
+                            [violationDict setObject:[NSString stringWithFormat:@"%f",eventLat] forKey:@"Latitude"];
+                            [violationDict setObject:[NSString stringWithFormat:@"%f",eventLong] forKey:@"Longitude"];
+                        }
+                        
                     }
-                    
-                }
+                
             }//is date after last timestamp
         }
         previousEvent = event;
