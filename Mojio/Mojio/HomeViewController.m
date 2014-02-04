@@ -35,8 +35,8 @@ Device* currentDevice;
     [self testInternetConnection];
     
     //Map stuff
-    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 67, 320, 245)];
-    [self.view addSubview:self.mapView];
+   // self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 67, 320, 245)];
+   // [self.view addSubview:self.mapView];
    
     
     //set userdefaults
@@ -68,6 +68,31 @@ Device* currentDevice;
     //Start timer for checking new data
     self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self
                                                     selector:@selector(checkTripData) userInfo:nil repeats:YES];
+    
+    //update UI for diff screen sizes
+    if (self.view.frame.size.height == 480) {
+        //3.5 inch screen
+        CGRect frame = [self.mapView frame];
+        frame.origin.y += 70;  // change the location
+        [self.mapView setFrame:frame];
+        
+    }
+    else
+    {
+        //4 inch screen or other
+        CGRect frame = [self.speedViolationButton frame];
+        frame.origin.y += 40;  // change the location
+        [self.speedViolationButton setFrame:frame];
+        
+        CGRect frame2 = [self.speedSeleectionButton frame];
+        frame2.origin.y += 40;  // change the location
+        [self.speedSeleectionButton setFrame:frame2];
+        
+        CGRect frame3 = [self.currentSpeedLimit frame];
+        frame3.origin.y += 40;  // change the location
+        [self.currentSpeedLimit setFrame:frame3];
+    }
+
 }
 
 -(void)viewWillAppear:(BOOL)animated

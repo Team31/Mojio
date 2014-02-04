@@ -27,6 +27,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *currentSpeedLimit;
 - (IBAction)speedViolationsButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *speedViolationButton;
 
 
 @end

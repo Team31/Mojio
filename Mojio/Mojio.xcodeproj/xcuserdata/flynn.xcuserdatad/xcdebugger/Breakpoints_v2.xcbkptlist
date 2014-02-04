@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "-populateDeviceData"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,12 +186,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "-loginTapped"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "-SpeedSelectionButtonPressed:"
             landmarkType = "5">
             <Locations>
                <Location
@@ -264,11 +264,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "-attemptUserLogin"
             landmarkType = "5">
          </BreakpointContent>
@@ -296,11 +296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "-populateDeviceData"
             landmarkType = "5">
          </BreakpointContent>
@@ -344,11 +344,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "-hasSpeedingOcurred"
             landmarkType = "5">
          </BreakpointContent>
@@ -360,11 +360,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "-hasSpeedingOcurred"
             landmarkType = "5">
          </BreakpointContent>
@@ -376,11 +376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "-hasSpeedingOcurred"
             landmarkType = "5">
          </BreakpointContent>
@@ -424,11 +424,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "-hasSpeedingOcurred"
             landmarkType = "5">
          </BreakpointContent>
@@ -440,11 +440,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
             landmarkName = "-hasSpeedingOcurred"
             landmarkType = "5">
          </BreakpointContent>
@@ -456,11 +456,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "-hasSpeedingOcurred"
             landmarkType = "5">
          </BreakpointContent>
@@ -472,11 +472,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "-hasSpeedingOcurred"
             landmarkType = "5">
          </BreakpointContent>
@@ -488,11 +488,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
             landmarkName = "-hasSpeedingOcurred"
             landmarkType = "5">
          </BreakpointContent>
@@ -504,11 +504,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
             landmarkName = "-hasSpeedingOcurred"
             landmarkType = "5">
          </BreakpointContent>
@@ -520,12 +520,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mojio/HomeViewController.m"
-            timestampString = "413247206.534092"
+            timestampString = "413248368.463994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "-hasSpeedingOcurred"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mojio/HomeViewController.m"
+            timestampString = "413248368.463994"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
