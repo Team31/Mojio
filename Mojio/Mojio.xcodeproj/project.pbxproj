@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F4470341885FBA600AD0E9B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4470331885FBA600AD0E9B /* MapKit.framework */; };
 		2FC9DFD41844245700DC0FA2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC9DFD21844245700DC0FA2 /* Reachability.m */; };
+		5211871018A1881200FA3EB4 /* SpeedViolationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5211870F18A1881200FA3EB4 /* SpeedViolationDetailViewController.m */; };
 		523D72051895F84100307D91 /* SpeedViolationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523D72041895F84100307D91 /* SpeedViolationViewController.m */; };
 		5254932C18418EF1003B1009 /* mojioIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5254932B18418EF1003B1009 /* mojioIcon.png */; };
 		525E74E2183C1CA6002C0B70 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525E74E1183C1CA6002C0B70 /* CoreLocation.framework */; };
@@ -52,6 +53,8 @@
 		2F4470331885FBA600AD0E9B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2FC9DFD21844245700DC0FA2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		2FC9DFD31844245700DC0FA2 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		5211870E18A1881200FA3EB4 /* SpeedViolationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedViolationDetailViewController.h; sourceTree = "<group>"; };
+		5211870F18A1881200FA3EB4 /* SpeedViolationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedViolationDetailViewController.m; sourceTree = "<group>"; };
 		523D72031895F84100307D91 /* SpeedViolationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedViolationViewController.h; sourceTree = "<group>"; };
 		523D72041895F84100307D91 /* SpeedViolationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedViolationViewController.m; sourceTree = "<group>"; };
 		5254932B18418EF1003B1009 /* mojioIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mojioIcon.png; sourceTree = "<group>"; };
@@ -144,6 +147,8 @@
 				52AA98FA1835DE9600577E0B /* EditDevicesViewController.m */,
 				523D72031895F84100307D91 /* SpeedViolationViewController.h */,
 				523D72041895F84100307D91 /* SpeedViolationViewController.m */,
+				5211870E18A1881200FA3EB4 /* SpeedViolationDetailViewController.h */,
+				5211870F18A1881200FA3EB4 /* SpeedViolationDetailViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52AA98EF1835CB7C00577E0B /* User.m in Sources */,
+				5211871018A1881200FA3EB4 /* SpeedViolationDetailViewController.m in Sources */,
 				52AA98F81835D7F800577E0B /* ManageDevicesViewController.m in Sources */,
 				52B410821835765E003AFC3E /* HomeViewController.m in Sources */,
 				52AA98FB1835DE9600577E0B /* EditDevicesViewController.m in Sources */,

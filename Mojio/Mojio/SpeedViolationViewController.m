@@ -7,6 +7,7 @@
 //
 
 #import "SpeedViolationViewController.h"
+#import "SpeedViolationDetailViewController.h"
 
 @interface SpeedViolationViewController ()
 
@@ -29,6 +30,7 @@
 	// Do any additional setup after loading the view.
     
     //get the data from NSUserDefaults
+    self.navigationItem.title = @"Speed Violations";
     self.violationsArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"speedViolations"];
 }
 
@@ -69,7 +71,7 @@
     cell.detailTextLabel.font = [UIFont systemFontOfSize:18.0];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    cell.backgroundColor = [UIColor purpleColor];
+    cell.backgroundColor = [UIColor colorWithRed:22.0f/255.0f green:148.0f/255.0f blue:247.0f/255.0f alpha:1.0f];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-mm-dd'T'HH:mm:ss.SSS'Z'"];
@@ -88,11 +90,27 @@
     return cell;
 }
 
-/*
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    SpeedViolationDetailViewController *speedViolationDetail = (SpeedViolationDetailViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SpeedViolationDetailViewController"];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-mm-dd'T'HH:mm:ss.SSS'Z'"];
+    NSDateFormatter *dateFormatForDisplay = [[NSDateFormatter alloc] init];
+    [dateFormatForDisplay setDateFormat:@"MMM dd, HH:mm"];
+    NSDate *date = [dateFormat dateFromString:[((NSDictionary*)[self.violationsArray objectAtIndex:(self.violationsArray.count - 1) - indexPath.row]) objectForKey:@"Date"]];
+    
+    speedViolationDetail.date = [dateFormatForDisplay stringFromDate:date];
+    speedViolationDetail.speed = [NSString stringWithFormat:@"%@ km/h", [((NSDictionary*)[self.violationsArray objectAtIndex:(self.violationsArray.count - 1) - indexPath.row]) objectForKey:@"Speed"]];
+    speedViolationDetail.latitude = [((NSDictionary*)[self.violationsArray objectAtIndex:(self.violationsArray.count - 1) - indexPath.row]) objectForKey:@"Latitude"];
+    speedViolationDetail.longitude = [((NSDictionary*)[self.violationsArray objectAtIndex:(self.violationsArray.count - 1) - indexPath.row]) objectForKey:@"Longitude"];
+    
+    [self.navigationController pushViewController:speedViolationDetail animated:true];
+
 }
-*/
+
 
 
 /*
