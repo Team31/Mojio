@@ -35,7 +35,7 @@ Device* currentDevice;
     [self testInternetConnection];
     
     //Map stuff
-    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 250)];
+    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 67, 320, 245)];
     [self.view addSubview:self.mapView];
    
     
@@ -60,7 +60,11 @@ Device* currentDevice;
     }
 
     [self updateMap];
-
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:22.0f/255.0f green:148.0f/255.0f blue:247.0f/255.0f alpha:1.0f];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+   [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
     //Start timer for checking new data
     self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self
                                                     selector:@selector(checkTripData) userInfo:nil repeats:YES];
@@ -85,7 +89,6 @@ Device* currentDevice;
         self.navigationItem.title = @"Home";
     }
     //Check if a user is currently logged in, pull data if they are
-    
 }
 
 - (void)didReceiveMemoryWarning

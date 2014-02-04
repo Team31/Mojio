@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2F4470341885FBA600AD0E9B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4470331885FBA600AD0E9B /* MapKit.framework */; };
+		2F6113FB18A19BFD00B51F19 /* tickets.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F6113F918A19BFD00B51F19 /* tickets.png */; };
+		2F6113FC18A19BFD00B51F19 /* speedLimit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F6113FA18A19BFD00B51F19 /* speedLimit.png */; };
 		2FC9DFD41844245700DC0FA2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC9DFD21844245700DC0FA2 /* Reachability.m */; };
 		5211871018A1881200FA3EB4 /* SpeedViolationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5211870F18A1881200FA3EB4 /* SpeedViolationDetailViewController.m */; };
 		523D72051895F84100307D91 /* SpeedViolationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523D72041895F84100307D91 /* SpeedViolationViewController.m */; };
@@ -51,6 +53,8 @@
 
 /* Begin PBXFileReference section */
 		2F4470331885FBA600AD0E9B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		2F6113F918A19BFD00B51F19 /* tickets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tickets.png; sourceTree = "<group>"; };
+		2F6113FA18A19BFD00B51F19 /* speedLimit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speedLimit.png; sourceTree = "<group>"; };
 		2FC9DFD21844245700DC0FA2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		2FC9DFD31844245700DC0FA2 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		5211870E18A1881200FA3EB4 /* SpeedViolationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedViolationDetailViewController.h; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 		5254932818418E16003B1009 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2F6113F918A19BFD00B51F19 /* tickets.png */,
+				2F6113FA18A19BFD00B51F19 /* speedLimit.png */,
 				5254932B18418EF1003B1009 /* mojioIcon.png */,
 			);
 			name = Resources;
@@ -342,7 +348,9 @@
 				52B4107F1835765E003AFC3E /* Main_iPad.storyboard in Resources */,
 				5254932C18418EF1003B1009 /* mojioIcon.png in Resources */,
 				52B410841835765E003AFC3E /* Images.xcassets in Resources */,
+				2F6113FB18A19BFD00B51F19 /* tickets.png in Resources */,
 				52B4107C1835765E003AFC3E /* Main_iPhone.storyboard in Resources */,
+				2F6113FC18A19BFD00B51F19 /* speedLimit.png in Resources */,
 				52B410731835765E003AFC3E /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
