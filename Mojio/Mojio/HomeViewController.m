@@ -64,8 +64,6 @@ Device* currentDevice;
     //Start timer for checking new data
     self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self
                                                     selector:@selector(checkTripData) userInfo:nil repeats:YES];
-
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
