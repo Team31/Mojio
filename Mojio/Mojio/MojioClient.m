@@ -336,4 +336,81 @@
     }
 }
 
+
+// initialize all static variables
+-(void)initialize{
+// initialize all necessary variables
+    
+    self.Mojio = @"http://sandbox.developer.moj.io/v1";
+    self.appID = @"87708830-31B7-464F-85D3-9E8FD22A2A10";
+    self.secretKey = @"c861e8a6-e230-4bd4-9c7c-241144071254";
+    self.minutes = @"120"; // int32
+    
+}
+
+
+// get the request url from the controller (e.g. mojios, apps, login), id, action and key
+-(NSString*) getURL:(NSString*)controller andID:(NSString*)id andAction:(NSString*)action andKey:(NSString*)key {
+    
+    NSMutableString * url = [[NSMutableString alloc] init];
+    [url appendString:(self.Mojio)];
+
+    if ([key length] != 0 && [id length] != 0 && [action length] != 0) {
+        // controller/id/action/action
+        [url appendString:@"/"];
+        [url appendString:[controller stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [url appendString:@"/"];
+        [url appendString:[id stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [url appendString:@"/"];
+        [url appendString:[action stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [url appendString:@"/"];
+        [url appendString:[action stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    } else if ([id length] != 0 && [action length] != 0) {
+        // controller/id/action
+        [url appendString:@"/"];
+        [url appendString:[controller stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [url appendString:@"/"];
+        [url appendString:[id stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [url appendString:@"/"];
+        [url appendString:[action stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+
+    } else if ([id length] != 0) {
+        // controller/id
+        [url appendString:@"/"];
+        [url appendString:[controller stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [url appendString:@"/"];
+        [url appendString:[id stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    } else if ([action length] != 0) {
+        // controller/action
+        [url appendString:@"/"];
+        [url appendString:[controller stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [url appendString:@"/"];
+        [url appendString:[action stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    } else {
+        // controller
+        [url appendString:@"/"];
+        [url appendString:[controller stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+
+    }
+    
+    return url;
+}
+
+-(void)login:(NSString*)username AndPassword:(NSString *)password {
+    
+    NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/login/%%7Bid%%7D/begin?id=87708830-31B7-464F-85D3-9E8FD22A2A10&secretKey=c861e8a6-e230-4bd4-9c7c-241144071254&userOrEmail=%@&password=%@&minutes=120",username, password];
+    NSURL *url = [NSURL URLWithString:str];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSError *error=nil;
+    id response=[NSJSONSerialization JSONObjectWithData:data options:
+                 NSJSONReadingMutableContainers error:&error];
+    if ([response objectForKey:@"_id"]) {
+        //return [response objectForKey:@"_id"];
+    }
+    
+    //return @"";
+}
+
+
+
 @end

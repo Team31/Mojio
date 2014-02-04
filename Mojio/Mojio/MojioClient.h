@@ -10,7 +10,7 @@
 
 @interface MojioClient : NSObject
 
-@property (strong, nonatomic) NSString *appID, *secretKey, *apiToken;
+//@property (strong, nonatomic) NSString *appID, *secretKey, *apiToken;
 @property int pagesize;
 
 -(NSString*)getAPIToken:(NSString*)username AndPassword:(NSString*)password;
@@ -29,4 +29,13 @@
 -(BOOL)deleteStoredMojio:(NSString*)deviceID andKey:(NSString*)key;
 
 
+
+
+// CLEANING IN PROCESS
+@property (nonatomic) NSString *Mojio, *appID, *secretKey, *apiToken, *minutes;
+-(void) initialize;
+-(NSString*) getURL:(NSString*)controller andID:(NSString*)id andAction:(NSString*)action andKey:(NSString*)key;
+
+
+-(void)login:(NSString*)username AndPassword:(NSString*)password;
 @end
