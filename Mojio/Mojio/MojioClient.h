@@ -37,5 +37,14 @@
 -(NSString*) getURL:(NSString*)controller andID:(NSString*)id andAction:(NSString*)action andKey:(NSString*)key;
 
 
--(void)login:(NSString*)username AndPassword:(NSString*)password;
+-(NSData*)sendRequest:(NSString*)url andData:(NSString*) data andMethod:(NSString*) method;
+
+-(NSString*)dataByMethodData:(NSData*)data andMethod:(NSString*) method;
+-(NSString*)dataByMethodDict:(NSDictionary*)dict andMethod:(NSString*) method;
+
+-(void)get;
+-(void)post;
+-(void)delete;
+-(void)put;
+
 @end
