@@ -54,7 +54,7 @@
             // redirect to homepage
             [[self navigationController] popViewControllerAnimated:YES];
         } else {
-            self.StatusLabel.text = @"Username and password combination incorrect.";
+            self.StatusLabel.text = @"Invalid password or username";
         }
     } else {
         self.StatusLabel.text = @"No valid username or password input";
