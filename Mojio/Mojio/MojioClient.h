@@ -30,7 +30,7 @@
 
 
 // CLEANING IN PROCESS
-@property (nonatomic) NSString *Mojio, *appID, *secretKey, *apiToken, *minutes, *ID;
+@property (nonatomic) NSString *Mojio, *appID, *secretKey, *apiToken, *minutes;
 -(void) initialize;
 -(NSString*) getURL:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key;
 
