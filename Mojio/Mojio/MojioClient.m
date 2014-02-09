@@ -34,175 +34,40 @@
 
 -(NSMutableDictionary*)getTripData
 {
-    if (self.apiToken) {
-        //TODO pagesize should be variable
-        NSString *str = @"http://sandbox.developer.moj.io/v1/trips/?pageSize=1000";
-        NSURL *url = [NSURL URLWithString:str];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSMutableURLRequest *mutableRequest = [request mutableCopy];
-        [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
-        request = [mutableRequest copy];
-        
-        NSHTTPURLResponse *response = nil;
-        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-
-        id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
+    NSData *returnData = [self get:@"trips" andID:nil andAction:nil andKey:nil];
+    id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
                      NSJSONReadingMutableContainers error:nil];
-        
-      //  NSArray *trips = [responseData objectForKey:@"Data"];
-      //  NSString *tripString = [NSString stringWithFormat:@"%@", responseData];
-        return responseData;
-        
-    }
-    else
-    {
-        NSLog(@"No trip data recieved");
-        return nil;
-    }
-    
+    return responseData;
 }
 
 -(NSMutableDictionary*)getEventDataForTrip:(NSString*)tripID
 {
-    if (self.apiToken) {
-        //TODO pagesize should be variable
-        //Insert tripID
-        NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/trips/%@/events?pageSize=10",tripID];
-        NSURL *url = [NSURL URLWithString:str];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSMutableURLRequest *mutableRequest = [request mutableCopy];
-        [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
-        request = [mutableRequest copy];
-        
-        NSHTTPURLResponse *response = nil;
-        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-        
-        id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
-                         NSJSONReadingMutableContainers error:nil];
-        
-        return responseData;
-        
-    }
-    else
-    {
-        NSLog(@"No trip data recieved");
-        return nil;
-    }
+    //TODO pagesize should be a variable
+    NSData *returnData = [self get:@"trips" andID:tripID andAction:@"events" andKey:nil];
+    id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
+                     NSJSONReadingMutableContainers error:nil];
     
+    return responseData;
 }
 
 
 -(NSMutableDictionary*)getUserData
 {
-    if (self.apiToken) {
-        //TODO pagesize should be variable
-        NSString *str = @"http://sandbox.developer.moj.io/v1/users/";
-        NSURL *url = [NSURL URLWithString:str];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSMutableURLRequest *mutableRequest = [request mutableCopy];
-        [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
-        request = [mutableRequest copy];
-        
-        NSHTTPURLResponse *response = nil;
-        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-        
-        id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
-                         NSJSONReadingMutableContainers error:nil];
-        
-        //  NSArray *trips = [responseData objectForKey:@"Data"];
-        //  NSString *tripString = [NSString stringWithFormat:@"%@", responseData];
-        return responseData;
-        
-    }
-    else
-    {
-        NSLog(@"No user data recieved");
-        return nil;
-    }
-    
+    //TODO pagesize should be variable
+    NSData *returnData = [self get:@"users" andID:nil andAction:nil andKey:nil];
+    id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
+                     NSJSONReadingMutableContainers error:nil];
+    return responseData;
 }
 
 -(NSMutableDictionary*)getDevices
 {
-    if (self.apiToken) {
-        //TODO pagesize should be variable
-        NSString *str = @"http://sandbox.developer.moj.io/v1/mojios/";
-        NSURL *url = [NSURL URLWithString:str];
+     //TODO pagesize should be variable
+     NSData *returnData = [self get:@"mojios" andID:nil andAction:nil andKey:nil];
         
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSMutableURLRequest *mutableRequest = [request mutableCopy];
-        [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
-        request = [mutableRequest copy];
-        
-        NSHTTPURLResponse *response = nil;
-        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-        
-        id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
+     id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
                          NSJSONReadingMutableContainers error:nil];
-        
-        //  NSArray *trips = [responseData objectForKey:@"Data"];
-        //  NSString *tripString = [NSString stringWithFormat:@"%@", responseData];
-        return responseData;
-        
-    }
-    else
-    {
-        NSLog(@"No user data recieved");
-        return nil;
-    }
-    
-}
-
--(void)saveDeviceData:(NSString*)deviceID andName:(NSString*)deviceName
-{
-    NSError* error;
-    if (self.apiToken) {
-        NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/mojios/%@", deviceID];
-        NSURL *url = [NSURL URLWithString:str];
-        NSString *jsonString;
-        
-        NSMutableDictionary *deviceDict = [[NSMutableDictionary alloc] init];
-        [deviceDict setValue:deviceID forKey:@"Id"];
-        [deviceDict setValue:deviceID forKey:@"_id"];
-        [deviceDict setValue:deviceName forKey:@"Name"];
-        [deviceDict setValue:@"80" forKey:@"Speed"];
-        [deviceDict setValue:@"save" forKey:@"action"];
-        
-        
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:deviceDict options:NSJSONWritingPrettyPrinted error:&error];
-        
-        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSMutableURLRequest *mutableRequest = [request mutableCopy];
-        
-        // hacks for now
-        //self.apiToken=@"431b0301-d225-4d7b-a31e-2e00d198d3f2";
-        
-        [mutableRequest addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
-        
-        [mutableRequest setHTTPMethod:@"PUT"];
-        [mutableRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [mutableRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [mutableRequest setValue:[NSString stringWithFormat:@"%d", [jsonString length]] forHTTPHeaderField:@"Content-Length"];
-        [mutableRequest setHTTPBody: jsonData];
-        
-        request = [mutableRequest copy];
-        
-        NSHTTPURLResponse *response = nil;
-        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-        
-        //NSLog(@"%@",[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding]);
-        
-    }
-    else
-    {
-        NSLog(@"No user data recieved");
-        //return nil;
-    }
+     return responseData;
 }
 
 -(BOOL)isUserLoggedIn{
@@ -213,57 +78,20 @@
     return false;
 }
 
--(NSString*)DictionaryToString:(NSDictionary*)inputDict{
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:inputDict                                                  options:0 error:nil];
-
-    if (! jsonData) {
-        NSLog(@"Got an error");
-        return @"";
-    } else {
-        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    
-        NSString *escaped = [[jsonString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""]stringByReplacingOccurrencesOfString:@"\n" withString:@"\\\\n"];
-    
-        /*[self.storeMojio:@"testing" andKey:@"hello" andValue:[NSString stringWithFormat:@"%@",escaped]];*/
-        return escaped;
-    }
-}
-
 -(BOOL)storeMojio:(NSString*)deviceID andKey:(NSString*)key andValue:(NSDictionary*)data{
     // store a key value pair for a device
     // use getStoredMojio with the deviceID key to grab the value
-    
-    if (self.apiToken) {
-        BOOL status = [self put:@"mojios" andID:deviceID andAction:@"store" andKey:key andData:data];
-        
-        // if no response text is given, the put was successful
-        if (status) {
-            return true;
-        } else {
-            return false;
-        }
-        
-    }
-    else
-    {
-        NSLog(@"No user data recieved");
-        return false;
-    }
+    BOOL status = [self put:@"mojios" andID:deviceID andAction:@"store" andKey:key andData:data];
+    return status;
 }
+
 -(NSString*)getStoredMojio:(NSString*)deviceID andKey:(NSString*)key{
-    if (self.apiToken) {
+    NSData *returnData = [self get:@"mojios" andID:deviceID andAction:@"store" andKey:@"deviceData"];
         
-        NSData *returnData = [self get:@"mojios" andID:deviceID andAction:@"store" andKey:@"deviceData"];
-        
-        NSString* value=[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-        return value;
-    }
-    else
-    {
-        NSLog(@"No user data recieved");
-        return nil;
-    }
+    NSString* value=[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    return value;
 }
+
 -(BOOL)deleteStoredMojio:(NSString*)deviceID andKey:(NSString*)key{
     if (self.apiToken) {
         NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/mojios/%@/store/%@",deviceID, key];
@@ -374,6 +202,8 @@
             [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
             [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             [request setHTTPBody: body];
+        } else if([method isEqualToString:@"GET"]) {
+            // put page limit, desc and page size here
         }
         
         [request addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
