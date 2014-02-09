@@ -49,13 +49,11 @@
     self.device.speedLimit = [self.speedLimitTextfield.text integerValue];
     
     //get dict containing all the device data to store to Mojio server
-    NSMutableDictionary *mojioData = [[NSMutableDictionary alloc] init];
+    NSDictionary *mojioData = [[NSMutableDictionary alloc] init];
     mojioData = [self.device createMojioDictionary];
     
-    NSString *mojioDataString = [[[Session sharedInstance] client] DictionaryToString:mojioData];
-    
     // send a request to mojio server to update the value
-    if (![[[Session sharedInstance] client] storeMojio:self.device.idNumber andKey:@"deviceData" andValue:mojioDataString]) {
+    if (![[[Session sharedInstance] client] storeMojio:self.device.idNumber andKey:@"deviceData" andValue:mojioData]) {
         NSLog(@"An error occurred during storing");
     }
 }

@@ -25,6 +25,7 @@
 -(MojioClient *) client
 {
     if (!_client) _client = [[MojioClient alloc] init];
+    [_client initialize];
     return _client;
 }
 

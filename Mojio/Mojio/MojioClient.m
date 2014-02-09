@@ -229,21 +229,18 @@
     }
 }
 
--(BOOL)storeMojio:(NSString*)deviceID andKey:(NSString*)key andValue:(NSString*)value{
+-(BOOL)storeMojio:(NSString*)deviceID andKey:(NSString*)key andValue:(NSDictionary*)data{
     // store a key value pair for a device
     // use getStoredMojio with the deviceID key to grab the value
     
     if (self.apiToken) {
-        NSData *returnData = [self sendRequest:[self getURL:@"mojios" andID:deviceID andAction:@"store" andKey:key] andData:value andMethod:@"PUT"];
-        
-        NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+        BOOL status = [self put:@"mojios" andID:deviceID andAction:@"store" andKey:key andData:data];
         
         // if no response text is given, the put was successful
-        if (returnString.length == 0) {
+        if (status) {
             return true;
         } else {
             return false;
-            NSLog(@"%@", returnString);
         }
         
     }
@@ -256,19 +253,10 @@
 -(NSString*)getStoredMojio:(NSString*)deviceID andKey:(NSString*)key{
     if (self.apiToken) {
         
-        NSData *returnData = [self sendRequest:[self getURL:@"mojios" andID:deviceID andAction:@"store" andKey:@"deviceData"] andData:nil andMethod:nil];
+        NSData *returnData = [self get:@"mojios" andID:deviceID andAction:@"store" andKey:@"deviceData"];
         
-        id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
-                         NSJSONReadingMutableContainers error:nil];
-        
-        // return the value string if successful
-        if (responseData == nil) {
-            NSString* value=[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-            return value;
-        } else {
-            NSLog(@"Key: %@ is not defined", key);
-            return nil;
-        }
+        NSString* value=[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+        return value;
     }
     else
     {
@@ -324,36 +312,36 @@
 }
 
 // get the request url from the controller (e.g. mojios, apps, login), id, action and key
--(NSString*) getURL:(NSString*)controller andID:(NSString*)id andAction:(NSString*)action andKey:(NSString*)key {
+-(NSString*) getURL:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key {
     
     NSMutableString * url = [[NSMutableString alloc] init];
     [url appendString:(self.Mojio)];
 
-    if ([key length] != 0 && [id length] != 0 && [action length] != 0) {
+    if ([key length] != 0 && [ID length] != 0 && [action length] != 0) {
         // controller/id/action/action
         [url appendString:@"/"];
         [url appendString:[controller stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [url appendString:@"/"];
-        [url appendString:[id stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [url appendString:[ID stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [url appendString:@"/"];
         [url appendString:[action stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [url appendString:@"/"];
         [url appendString:[key stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    } else if ([id length] != 0 && [action length] != 0) {
+    } else if ([ID length] != 0 && [action length] != 0) {
         // controller/id/action
         [url appendString:@"/"];
         [url appendString:[controller stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [url appendString:@"/"];
-        [url appendString:[id stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [url appendString:[ID stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [url appendString:@"/"];
         [url appendString:[action stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 
-    } else if ([id length] != 0) {
+    } else if ([ID length] != 0) {
         // controller/id
         [url appendString:@"/"];
         [url appendString:[controller stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [url appendString:@"/"];
-        [url appendString:[id stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [url appendString:[ID stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     } else if ([action length] != 0) {
         // controller/action
         [url appendString:@"/"];
@@ -403,16 +391,6 @@
     
 }
 
-// convert data to string
--(NSString*)dataByMethodData:(NSData*)data andMethod:(NSString*) method{
-    // stringify the data if inputted, otherwise just return an empty string
-    if([method isEqualToString:@"PUT"] || [method isEqualToString:@"POST"]) {
-        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    } else {
-        return @"";
-    }
-}
-
 // convert dictionary to string
 -(NSString*)dataByMethodDict:(NSDictionary*)dict andMethod:(NSString*) method{
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict                                                  options:0 error:nil];
@@ -425,12 +403,43 @@
         
         NSString *escaped = [[jsonString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""]stringByReplacingOccurrencesOfString:@"\n" withString:@"\\\\n"];
         
-        /*[self.storeMojio:@"testing" andKey:@"hello" andValue:[NSString stringWithFormat:@"%@",escaped]];*/
         return escaped;
     }
 }
 
--(void)get{
-    
+-(NSData*)get:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key{
+    if (self.apiToken) {
+        
+        NSData *returnData = [self sendRequest:[self getURL:controller andID:ID andAction:action andKey:key] andData:nil andMethod:@"GET"];
+        
+        return returnData;
+    }
+    else
+    {
+        NSLog(@"No user data recieved");
+        return nil;
+    }
+}
+
+-(BOOL)put:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andData:(NSDictionary*)data {
+    if (self.apiToken) {
+        NSData *returnData = [self sendRequest:[self getURL:controller andID:ID andAction:action andKey:key] andData:[self dataByMethodDict:data andMethod:@"PUT"] andMethod:@"PUT"];
+        
+        NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+        
+        // if no response text is given, the put was successful
+        if (returnString.length == 0) {
+            return true;
+        } else {
+            return false;
+            NSLog(@"%@", returnString);
+        }
+    }
+    else
+    {
+        NSLog(@"No user data received");
+        return false;
+    }
+
 }
 @end

@@ -24,7 +24,7 @@
 // methods to store, get and delete values for a Mojio device
 -(NSString*)DictionaryToString:(NSDictionary*)inputDict;
 
--(BOOL)storeMojio:(NSString*)deviceID andKey:(NSString*)key andValue:(NSString*)value;
+-(BOOL)storeMojio:(NSString*)deviceID andKey:(NSString*)key andValue:(NSDictionary*)data;
 -(NSString*)getStoredMojio:(NSString*)deviceID andKey:(NSString*)key;
 -(BOOL)deleteStoredMojio:(NSString*)deviceID andKey:(NSString*)key;
 
@@ -34,7 +34,7 @@
 // CLEANING IN PROCESS
 @property (nonatomic) NSString *Mojio, *appID, *secretKey, *apiToken, *minutes;
 -(void) initialize;
--(NSString*) getURL:(NSString*)controller andID:(NSString*)id andAction:(NSString*)action andKey:(NSString*)key;
+-(NSString*) getURL:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key;
 
 
 -(NSData*)sendRequest:(NSString*)url andData:(NSString*) data andMethod:(NSString*) method;
@@ -42,9 +42,11 @@
 -(NSString*)dataByMethodData:(NSData*)data andMethod:(NSString*) method;
 -(NSString*)dataByMethodDict:(NSDictionary*)dict andMethod:(NSString*) method;
 
--(void)get;
--(void)post;
+-(NSData*)get:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key;
+
+-(BOOL)put:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andData:(NSDictionary*)data;
+
 -(void)delete;
--(void)put;
+
 
 @end
