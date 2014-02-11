@@ -23,4 +23,4 @@ When I type "test" into the "UsernameTextField" text field
 When I type "nopass" into the "PasswordTextField" text field
 When I wait for 1 second
 When I touch the button marked "Login"
-Then I should see "Username and password combination incorrect."
+Then I should see "Invalid password or username"
