@@ -35,6 +35,8 @@
 -(NSMutableDictionary*)getTripData
 {
     NSData *returnData = [self get:@"trips" andID:nil andAction:nil andKey:nil andPageSize:@"1000"];
+    if (returnData == nil)
+        return nil;
     id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
                      NSJSONReadingMutableContainers error:nil];
     return responseData;
@@ -44,6 +46,8 @@
 {
     //TODO pagesize should be a variable
     NSData *returnData = [self get:@"trips" andID:tripID andAction:@"events" andKey:nil andPageSize:nil];
+    if (returnData == nil)
+        return nil;
     id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
                      NSJSONReadingMutableContainers error:nil];
     
@@ -55,6 +59,8 @@
 {
     //TODO pagesize should be variable
     NSData *returnData = [self get:@"users" andID:nil andAction:nil andKey:nil andPageSize:nil];
+    if (returnData == nil)
+        return nil;
     id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
                      NSJSONReadingMutableContainers error:nil];
     return responseData;
@@ -64,7 +70,8 @@
 {
      //TODO pagesize should be variable
      NSData *returnData = [self get:@"mojios" andID:nil andAction:nil andKey:nil andPageSize:nil];
-        
+     if (returnData == nil)
+        return nil;
      id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
                          NSJSONReadingMutableContainers error:nil];
      return responseData;
