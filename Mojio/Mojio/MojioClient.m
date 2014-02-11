@@ -34,7 +34,7 @@
 
 -(NSMutableDictionary*)getTripData
 {
-    NSData *returnData = [self get:@"trips" andID:nil andAction:nil andKey:nil];
+    NSData *returnData = [self get:@"trips" andID:nil andAction:nil andKey:nil andPageSize:@"1000"];
     id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
                      NSJSONReadingMutableContainers error:nil];
     return responseData;
@@ -43,7 +43,7 @@
 -(NSMutableDictionary*)getEventDataForTrip:(NSString*)tripID
 {
     //TODO pagesize should be a variable
-    NSData *returnData = [self get:@"trips" andID:tripID andAction:@"events" andKey:nil];
+    NSData *returnData = [self get:@"trips" andID:tripID andAction:@"events" andKey:nil andPageSize:nil];
     id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
                      NSJSONReadingMutableContainers error:nil];
     
@@ -54,7 +54,7 @@
 -(NSMutableDictionary*)getUserData
 {
     //TODO pagesize should be variable
-    NSData *returnData = [self get:@"users" andID:nil andAction:nil andKey:nil];
+    NSData *returnData = [self get:@"users" andID:nil andAction:nil andKey:nil andPageSize:nil];
     id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
                      NSJSONReadingMutableContainers error:nil];
     return responseData;
@@ -63,7 +63,7 @@
 -(NSMutableDictionary*)getDevices
 {
      //TODO pagesize should be variable
-     NSData *returnData = [self get:@"mojios" andID:nil andAction:nil andKey:nil];
+     NSData *returnData = [self get:@"mojios" andID:nil andAction:nil andKey:nil andPageSize:nil];
         
      id responseData=[NSJSONSerialization JSONObjectWithData:returnData options:
                          NSJSONReadingMutableContainers error:nil];
@@ -86,7 +86,7 @@
 }
 
 -(NSString*)getStoredMojio:(NSString*)deviceID andKey:(NSString*)key{
-    NSData *returnData = [self get:@"mojios" andID:deviceID andAction:@"store" andKey:@"deviceData"];
+    NSData *returnData = [self get:@"mojios" andID:deviceID andAction:@"store" andKey:@"deviceData" andPageSize:nil];
         
     NSString* value=[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     return value;
@@ -186,11 +186,25 @@
     return url;
 }
 
--(NSData*)sendRequest:(NSString*)url andData:(NSString*) data andMethod:(NSString*) method{
+-(NSData*)sendRequest:(NSString*)url andData:(NSString*) data andMethod:(NSString*) method andPageSize:(NSString*) pageSize{
     if (self.apiToken) {
     
         if ([method length] == 0)
             method = @"GET";
+        
+        if([method isEqualToString:@"GET"] && pageSize && [pageSize length] != 0) {
+            NSMutableString * newUrl = [[NSMutableString alloc] init];
+            [newUrl appendString:(url)];
+            [newUrl appendString:@"/"];
+            // put page limit, desc and page size here
+            //NSString *datatest = [[NSString alloc] init ];
+            [newUrl appendString:[NSString stringWithFormat:@"?pageSize=%@",pageSize]];
+            //NSMutableData *bodyData = [NSMutableData data];
+            //[bodyData appendData:[datatest dataUsingEncoding:NSUTF8StringEncoding]];
+            //[request setHTTPBody: bodyData];
+            url = [NSString stringWithString:newUrl];
+        }
+
         
         NSURL *requestUrl = [NSURL URLWithString:url];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestUrl];
@@ -202,10 +216,7 @@
             [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
             [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             [request setHTTPBody: body];
-        } else if([method isEqualToString:@"GET"]) {
-            // put page limit, desc and page size here
         }
-        
         [request addValue:self.apiToken forHTTPHeaderField:@"MojioAPIToken"];
         [request setHTTPMethod:method];
         
@@ -237,10 +248,10 @@
     }
 }
 
--(NSData*)get:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key{
+-(NSData*)get:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andPageSize:(NSString*)pageSize{
     if (self.apiToken) {
         
-        NSData *returnData = [self sendRequest:[self getURL:controller andID:ID andAction:action andKey:key] andData:nil andMethod:@"GET"];
+        NSData *returnData = [self sendRequest:[self getURL:controller andID:ID andAction:action andKey:key] andData:nil andMethod:@"GET" andPageSize:pageSize];
         
         return returnData;
     }
@@ -253,7 +264,7 @@
 
 -(BOOL)put:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andData:(NSDictionary*)data {
     if (self.apiToken) {
-        NSData *returnData = [self sendRequest:[self getURL:controller andID:ID andAction:action andKey:key] andData:[self dataByMethodDict:data andMethod:@"PUT"] andMethod:@"PUT"];
+        NSData *returnData = [self sendRequest:[self getURL:controller andID:ID andAction:action andKey:key] andData:[self dataByMethodDict:data andMethod:@"PUT"] andMethod:@"PUT" andPageSize:nil];
         
         NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
         

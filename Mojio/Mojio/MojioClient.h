@@ -35,11 +35,11 @@
 -(NSString*) getURL:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key;
 
 
--(NSData*)sendRequest:(NSString*)url andData:(NSString*) data andMethod:(NSString*) method;
+-(NSData*)sendRequest:(NSString*)url andData:(NSString*) data andMethod:(NSString*) method andPageSize:(NSString*)pageSize;
 
 -(NSString*)dataByMethodDict:(NSDictionary*)dict andMethod:(NSString*) method;
 
--(NSData*)get:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key;
+-(NSData*)get:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andPageSize:(NSString*)pageSize;
 
 -(BOOL)put:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andData:(NSDictionary*)data;
 
