@@ -301,6 +301,7 @@
                                 <rect key="frame" x="0.0" y="323" width="160" height="140"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.25490197539329529" green="0.70980393886566162" blue="0.9647059440612793" alpha="1" colorSpace="deviceRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="Speed Selection"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="19"/>
                                 <state key="normal" backgroundImage="speedLimit.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

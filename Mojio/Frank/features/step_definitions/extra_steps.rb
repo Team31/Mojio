@@ -30,6 +30,11 @@ Then(/^I wait to see "(.*?)" in the "(.*?)" text field$/) do |arg1, arg2|
 	check_element_exists( text_field_selector )
 end
 
+When(/^I touch2 "(.*?)"$/) do |arg1|
+	#text_field_selector = "view marked:'#{arg1}'"
+	forced_touch("view marked:'#{arg1}'")
+end
+
 def forced_touch(selector)
 	touch_success = frankly_map(selector, 'FEX_forcedTouch')
 end

@@ -13,13 +13,14 @@ When I type "Teamthirty1" into the "PasswordTextField" text field
 When I wait for 5 second
 When I touch the button marked "Login"
 Then I wait to not see a navigation bar titled "Login"
-When I touch the button marked "Speed Selection"
+#When I touch the button marked "currentSpeed"
+When I touch2 "currentSpeed"
 #Then I wait for 5 second
 #And I touch "Mile"
-Then I wait for 5 second
+Then I wait for 1 second
 When I select 1nd row and lebel "60" in picker "speedPicker"
 #And I touch "30"
-Then I wait for 5 second
+Then I wait for 1 second
 And I touch "Set"
 Then I wait for 5 second
 And I wait to see "20" in the "currentSpeed" text field
