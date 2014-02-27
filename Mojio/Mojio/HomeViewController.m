@@ -189,6 +189,10 @@ Device* currentDevice;
 }
 
 - (void)attemptUserLogin{
+    //if a current user is already defined, no need to attempt user login
+    if ([[Session sharedInstance] currentUser]) {
+        return;
+    }
     //get APItoken from NSUserdefaults
     //set the client with that token
     //try to get user data
@@ -243,7 +247,7 @@ Device* currentDevice;
     //TODO: is this gaurunteed to be in order?
     
     //get Current Deivce speed limit
-    NSInteger currentDeviceindex = [[[Session sharedInstance] currentUser] currentDeviceIndex];
+    NSInteger currentDeviceindex = [[Session sharedInstance] currentUser].currentDeviceIndex;
     currentDevice = ((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:currentDeviceindex]);
     NSInteger deviceSpeedLimit = currentDevice.speedLimit;
     

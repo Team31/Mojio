@@ -79,6 +79,8 @@
     [self.navigationController pushViewController:editDevicesViewController animated:true];
     editDevicesViewController.device = ((Device*)[[Session sharedInstance]currentUser].devices[indexPath.row]);
     
+    editDevicesViewController.currentDeviceIndex = indexPath.row;
+    
 }
 
 

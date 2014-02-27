@@ -44,6 +44,18 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event //hide the keyboard when user tap an empty space
+{
+    [self.view endEditing:YES];
+}
+
+- (IBAction)setActiveDeviceTapped:(id)sender {
+    [[Session sharedInstance] currentUser].currentDeviceIndex = self.currentDeviceIndex;
+}
+
+- (IBAction)saveChangesTapped:(id)sender {
     self.device.idNumber = self.idTextfield.text;
     self.device.nickname = self.nicknameTextfield.text;
     self.device.speedLimit = [self.speedLimitTextfield.text integerValue];
@@ -56,10 +68,8 @@
     if (![[[Session sharedInstance] client] storeMojio:self.device.idNumber andKey:@"deviceData" andValue:mojioData]) {
         NSLog(@"An error occurred during storing");
     }
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event //hide the keyboard when user tap an empty space
-{
-    [self.view endEditing:YES];
+    
+    // redirect to homepage
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 @end
