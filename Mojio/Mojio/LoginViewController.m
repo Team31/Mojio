@@ -36,6 +36,10 @@
     }
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationItem.hidesBackButton = TRUE;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

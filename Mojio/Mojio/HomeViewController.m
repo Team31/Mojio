@@ -28,7 +28,6 @@ Device* currentDevice;
     
     //set the navigtion bar left and right buttons
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Devices" style:UIBarButtonItemStylePlain target:self action:@selector(manageDevicesTapped)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(loginTapped)];
     
     //get main storyboard, we will instantiate viewControllers from this
     self.storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
@@ -98,6 +97,14 @@ Device* currentDevice;
 -(void)viewWillAppear:(BOOL)animated
 {
     [self attemptUserLogin];
+    
+    if ([[[Session sharedInstance] client] isUserLoggedIn]) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"LogOut" style:UIBarButtonItemStylePlain target:self action:@selector(loginTapped)];
+    }
+    else{
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(loginTapped)];
+    }
+
 
     NSInteger currentDeviceindex = [[[Session sharedInstance] currentUser] currentDeviceIndex];
     //make home page title the first device nickname, if it exists
@@ -113,7 +120,12 @@ Device* currentDevice;
     {
         self.navigationItem.title = @"Home";
     }
-    //Check if a user is currently logged in, pull data if they are
+    
+    //If the user is not logged in, present the login screen
+    if (![[[Session sharedInstance] client] isUserLoggedIn]) {
+        UIViewController *loginViewController = (LoginViewController *)[self.storyBoard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        [self.navigationController pushViewController:loginViewController animated:true];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -149,6 +161,10 @@ Device* currentDevice;
 }
 
 - (void)loginTapped{
+    if ([[[Session sharedInstance] client] isUserLoggedIn]) {
+        //logout user
+        [[Session sharedInstance] logoutCurrentUser];
+    }
     UIViewController *loginViewController = (LoginViewController *)[self.storyBoard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     [self.navigationController pushViewController:loginViewController animated:true];
 }

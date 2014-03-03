@@ -45,4 +45,11 @@
     }
     return false;
 }
+
+-(void) logoutCurrentUser{
+    self.APIToken = NULL;
+    self.client.apiToken = NULL;
+    [[NSUserDefaults standardUserDefaults] setObject:NULL forKey:@"apiToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 @end

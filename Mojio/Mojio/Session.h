@@ -18,5 +18,6 @@
 
 + (Session *)sharedInstance;
 -(BOOL)login:(NSString*)username AndPassword:(NSString*)password;
+-(void)logoutCurrentUser;
 
 @end
