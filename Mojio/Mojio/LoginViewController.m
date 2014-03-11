@@ -30,6 +30,7 @@
 	// Do any additional setup after loading the view.
     //self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Login";
+    self.PasswordTextField.secureTextEntry = YES;
     
     if ([[[Session sharedInstance] client] isUserLoggedIn]) {
         self.StatusLabel.text = @"You are already logged in";
