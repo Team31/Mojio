@@ -74,7 +74,7 @@
     cell.backgroundColor = [UIColor colorWithRed:22.0f/255.0f green:148.0f/255.0f blue:247.0f/255.0f alpha:1.0f];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-mm-dd'T'HH:mm:ss.SSS'Z'"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
     
     NSDateFormatter *dateFormatForDisplay = [[NSDateFormatter alloc] init];
     [dateFormatForDisplay setDateFormat:@"MMM dd, HH:mm"];
@@ -97,7 +97,7 @@
     SpeedViolationDetailViewController *speedViolationDetail = (SpeedViolationDetailViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SpeedViolationDetailViewController"];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-mm-dd'T'HH:mm:ss.SSS'Z'"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
     NSDateFormatter *dateFormatForDisplay = [[NSDateFormatter alloc] init];
     [dateFormatForDisplay setDateFormat:@"MMM dd, HH:mm"];
     NSDate *date = [dateFormat dateFromString:[((NSDictionary*)[self.violationsArray objectAtIndex:(self.violationsArray.count - 1) - indexPath.row]) objectForKey:@"Date"]];

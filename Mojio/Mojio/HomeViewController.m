@@ -25,7 +25,7 @@ Device* currentDevice;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.firstTimer = false;
     //set the navigtion bar left and right buttons
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Devices" style:UIBarButtonItemStylePlain target:self action:@selector(manageDevicesTapped)];
     
@@ -148,8 +148,6 @@ Device* currentDevice;
     [self.mapView setRegion:region];
     MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
     myAnnotation.coordinate = CLLocationCoordinate2DMake(lastLatitude, lastLongitude);
-    //myAnnotation.title = @"Matthews Pizza";
-    //myAnnotation.subtitle = @"Best Pizza in Town";
     [self.mapView addAnnotation:myAnnotation];
 
     
@@ -223,6 +221,12 @@ Device* currentDevice;
 
 
 - (void)checkTripData {
+    if (!self.firstTimer) {
+        //do not check immediately, start checking after 10 sec
+        //this was background fetch has a chance to calculate
+        self.firstTimer = true;
+        return;
+    }
 
     //alert user of speeding
     if ([self hasSpeedingOcurred]) {
@@ -277,7 +281,7 @@ Device* currentDevice;
     //save the last event date, so you can start from there next time
     NSDate *lastEventDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastCheckedTimestamp"];
     
-    [dateFormat setDateFormat:@"yyyy-mm-dd'T'HH:mm:ss.SSS'Z'"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
     
     //Save values for speed Violation list
     NSMutableDictionary *violationDict = [[NSMutableDictionary alloc] init];
@@ -329,11 +333,12 @@ Device* currentDevice;
                         
                         if (speed > deviceSpeedLimit) {
                             exceededSpeed = speed;
-                          //TODO: set speed violation data?
                             [violationDict setObject:[dateFormat stringFromDate:eventDate] forKey:@"Date"];
                             [violationDict setObject:[NSString stringWithFormat:@"%.f",speed] forKey:@"Speed"];
                             [violationDict setObject:[NSString stringWithFormat:@"%f",eventLat] forKey:@"Latitude"];
                             [violationDict setObject:[NSString stringWithFormat:@"%f",eventLong] forKey:@"Longitude"];
+                            //don't give another alert for at least 60 seconds
+                            lastEventDate = [lastEventDate dateByAddingTimeInterval:60];
                         }
                         
                     }
@@ -349,7 +354,6 @@ Device* currentDevice;
     
 
     if (exceededSpeed > 0) {
-        //TODO: add the speed violation to the list
         NSMutableArray *mutableArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"speedViolations"]];
         [mutableArray addObject:violationDict];
         NSArray *array = [NSArray arrayWithArray:mutableArray];
@@ -372,7 +376,7 @@ Device* currentDevice;
     {
         // Update the UI on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Yayyy, we have the interwebs!");
+            NSLog(@"Internet Accessible");
         });
     };
     
@@ -381,7 +385,7 @@ Device* currentDevice;
     {
         // Update the UI on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Someone broke the internet :(");
+            NSLog(@"No internet access");
         });
     };
     
@@ -397,10 +401,7 @@ Device* currentDevice;
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     id <MKAnnotation> annotation = [view annotation];
-    if ([annotation isKindOfClass:[MKPointAnnotation class]])
-    {
-        NSLog(@"Clicked Pizza Shop");
-    }
+
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Disclosure Pressed" message:@"Click Cancel to Go Back" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     [alertView show];
 }

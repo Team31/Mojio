@@ -55,6 +55,9 @@
         if ([[Session sharedInstance] login:self.UsernameTextField.text AndPassword:self.PasswordTextField.text]){
             self.StatusLabel.text = @"Login successful";
             
+            //get the new device data
+            [((HomeViewController*)[self.navigationController.viewControllers objectAtIndex:0]) populateDeviceData];
+            
             // redirect to homepage
             [[self navigationController] popViewControllerAnimated:YES];
         } else {
