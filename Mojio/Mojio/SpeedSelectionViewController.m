@@ -49,13 +49,13 @@ Device* currentDevice;
         self.speedSelected.text = [NSString stringWithFormat:@"%ld",(long)speedLimit];
         speedS = speedLimit;
         
-        // default device on off status set
-        if (currentDevice.onOff == true) {
-            NSLog(@"true");
-            self.toggleOnOff.selectedSegmentIndex = 0;
-        } else {
-            self.toggleOnOff.selectedSegmentIndex = 1;
         }
+    // default device on off status set
+    if (currentDevice.onOff == true) {
+        NSLog(@"true");
+        self.toggleOnOff.selectedSegmentIndex = 0;
+    } else {
+        self.toggleOnOff.selectedSegmentIndex = 1;
     }
 
 }
