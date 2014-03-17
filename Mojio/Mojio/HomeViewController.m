@@ -269,7 +269,12 @@ Device* currentDevice;
     //get Current Deivce speed limit
     NSInteger currentDeviceindex = [[Session sharedInstance] currentUser].currentDeviceIndex;
     currentDevice = ((Device*)[[[[Session sharedInstance] currentUser] devices] objectAtIndex:currentDeviceindex]);
+    
     NSInteger deviceSpeedLimit = currentDevice.speedLimit;
+    if (!currentDevice.onOff) {
+        //if the device is off the limit should not be used
+        deviceSpeedLimit = 100000;
+    }
     
     //go through each event and calculate the speed between each event
     //based on the timestamp and location

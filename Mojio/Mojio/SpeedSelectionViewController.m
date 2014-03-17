@@ -225,5 +225,6 @@ Device* currentDevice;
         // speed limit for device is off
         onOffStatus = false;
     }
+    currentDevice.onOff = onOffStatus;
 }
 @end
