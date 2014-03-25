@@ -13,18 +13,18 @@
 //@property (strong, nonatomic) NSString *appID, *secretKey, *apiToken;
 @property int pagesize;
 
--(NSString*)getAPIToken:(NSString*)username AndPassword:(NSString*)password;
+-(NSString*)getAPITokenWithUsername:(NSString*)username AndPassword:(NSString*)password;
 -(NSMutableDictionary*)getTripData;
--(NSMutableDictionary*)getEventDataForTrip:(NSString*)tripID;
+-(NSMutableDictionary*)getEventDataForTripWithTripID:(NSString*)tripID;
 -(NSMutableDictionary*)getUserData;
 -(NSMutableDictionary*)getDevices;
 
 -(BOOL)isUserLoggedIn;
 
 
--(BOOL)storeMojio:(NSString*)deviceID andKey:(NSString*)key andValue:(NSDictionary*)data;
--(NSString*)getStoredMojio:(NSString*)deviceID andKey:(NSString*)key;
--(BOOL)deleteStoredMojio:(NSString*)deviceID andKey:(NSString*)key;
+-(BOOL)storeMojioWithDeviceID:(NSString*)deviceID andKey:(NSString*)key andValue:(NSDictionary*)data;
+-(NSString*)getStoredMojioWithDeviceID:(NSString*)deviceID andKey:(NSString*)key;
+-(BOOL)deleteStoredMojioWithDeviceID:(NSString*)deviceID andKey:(NSString*)key;
 
 
 
@@ -32,16 +32,16 @@
 // CLEANING IN PROCESS
 @property (nonatomic) NSString *Mojio, *appID, *secretKey, *apiToken, *minutes;
 -(void) initialize;
--(NSString*) getURL:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key;
+-(NSString*) getURLWithController:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key;
 
 
--(NSData*)sendRequest:(NSString*)url andData:(NSString*) data andMethod:(NSString*) method andPageSize:(NSString*)pageSize;
+-(NSData*)sendRequestWithURL:(NSString*)url andData:(NSString*) data andMethod:(NSString*) method andPageSize:(NSString*)pageSize;
 
--(NSString*)dataByMethodDict:(NSDictionary*)dict andMethod:(NSString*) method;
+-(NSString*)dataByMethodDictWithDict:(NSDictionary*)dict andMethod:(NSString*) method;
 
--(NSData*)get:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andPageSize:(NSString*)pageSize;
+-(NSData*)getWithController:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andPageSize:(NSString*)pageSize;
 
--(BOOL)put:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andData:(NSDictionary*)data;
+-(BOOL)putWithController:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andData:(NSDictionary*)data;
 
 
 @end

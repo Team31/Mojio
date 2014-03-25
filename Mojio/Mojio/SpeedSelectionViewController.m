@@ -195,7 +195,7 @@ Device* currentDevice;
     mojioData = [currentDevice createMojioDictionary];
     
     // send a request to mojio server to update the value
-    if (![[[Session sharedInstance] client] storeMojio:currentDevice.idNumber andKey:@"deviceData" andValue:mojioData]) {
+    if (![[[Session sharedInstance] client] storeMojioWithDeviceID:currentDevice.idNumber andKey:@"deviceData" andValue:mojioData]) {
         NSLog(@"An error occurred during storing");
     }
     

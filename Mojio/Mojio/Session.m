@@ -32,7 +32,7 @@
 -(BOOL)login:(NSString*)username AndPassword:(NSString*)password
 {
     // set the session API token if login information is correct
-    NSString *response = [self.client getAPIToken:username AndPassword:password];
+    NSString *response = [self.client getAPITokenWithUsername:username AndPassword:password];
     
     if(response.length > 0){
         self.APIToken = response;

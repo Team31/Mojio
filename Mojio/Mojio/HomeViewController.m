@@ -262,7 +262,7 @@ Device* currentDevice;
     NSString* tripIDString = [((NSMutableDictionary*)[tripData objectAtIndex:[tripData count]-1]) objectForKey:@"_id"];
     
     //get the events for that most recent trip
-    NSMutableDictionary* tripEvents = [[[Session sharedInstance] client] getEventDataForTrip:tripIDString];
+    NSMutableDictionary* tripEvents = [[[Session sharedInstance] client] getEventDataForTripWithTripID:tripIDString];
     NSMutableArray* tripEventsArray = [tripEvents objectForKey:@"Data"];
     //TODO: is this gaurunteed to be in order?
     

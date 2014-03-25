@@ -85,7 +85,7 @@
     //get the ID for the most recent trip
     NSString* tripIDString = [((NSMutableDictionary*)[tripData objectAtIndex:[tripData count]-1]) objectForKey:@"_id"];
     //get the events for that most recent trip
-    NSMutableDictionary* tripEvents = [[self.session client] getEventDataForTrip:tripIDString];
+    NSMutableDictionary* tripEvents = [[self.session client] getEventDataForTripWithTripID:tripIDString];
     
     XCTAssertNotNil(tripEvents, @"Get Event Data for Trip with Valid TripID");
 }
@@ -98,7 +98,7 @@
     //get the ID for the most recent trip
     NSString* tripIDString = [((NSMutableDictionary*)[tripData objectAtIndex:[tripData count]-1]) objectForKey:@"_id"];
     //get the events for that most recent trip
-    NSMutableDictionary* tripEvents = [[self.session client] getEventDataForTrip:tripIDString];
+    NSMutableDictionary* tripEvents = [[self.session client] getEventDataForTripWithTripID:tripIDString];
     
     XCTAssertNil(tripEvents, @"Get Event Data for Trip with Invalid Session");
 }
@@ -111,7 +111,7 @@
     //get the ID for the most recent trip
     NSString* tripIDString = @"";
     //get the events for that most recent trip
-    NSMutableDictionary* tripEvents = [[self.session client] getEventDataForTrip:tripIDString];
+    NSMutableDictionary* tripEvents = [[self.session client] getEventDataForTripWithTripID:tripIDString];
     NSString *expectation = [tripEvents objectForKey:@"Message"];
     XCTAssertTrue([expectation isEqualToString:@"The request is invalid."], @"Get Event Data for Trip with Invalid TripID");
 }

@@ -22,7 +22,7 @@
         NSString* onOffReturned = [[NSString alloc]init];
         NSString* nickname = [[NSString alloc] init];
         
-        deviceData = [[[Session sharedInstance] client] getStoredMojio:self.idNumber andKey:@"deviceData"];
+        deviceData = [[[Session sharedInstance] client] getStoredMojioWithDeviceID:self.idNumber andKey:@"deviceData"];
         
         // get speed limit from Mojio server if defined, otherwise set speed limit to zero and onOff to off
         // unescape any escaped characters
