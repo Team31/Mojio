@@ -26,24 +26,6 @@
     self.session = [[Session sharedInstance]init];
 }
 
-- (void)testgetAPITokenValidCred
-{
-    NSString *username=@"team31";
-    NSString *password=@"Teamthirty1";
-    
-    NSString *response = [self.mc getAPIToken:username AndPassword:password];
-    
-    XCTAssertTrue(![response isEqual:@""], @"Get API Token Test with Valid Cred.");
-}
-
-- (void)testgetAPITokenInvalidCred
-{
-    NSString *username=@"testgetAPITokenInvalid";
-    NSString *password=@"testgetAPITokenInvalid";
-    NSString *response = [self.mc getAPIToken:username AndPassword:password];
-    
-    XCTAssertTrue([response isEqual:@""], @"Get API Token Test with Invalid Cred.");
-}
 
 - (void)testgetTripDataWithSession
 {
