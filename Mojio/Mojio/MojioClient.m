@@ -17,6 +17,18 @@
 
 @implementation MojioClient
 
+// initialize all static variables
+-(void)initialize{
+    // initialize all necessary variables
+    
+    self.Mojio = @"http://sandbox.developer.moj.io/v1";
+    self.appID = @"87708830-31B7-464F-85D3-9E8FD22A2A10";
+    self.secretKey = @"c861e8a6-e230-4bd4-9c7c-241144071254";
+    self.minutes = @"120"; // int32
+    
+}
+
+// login the user and get the the token id
 -(NSString*)getAPITokenWithUsername:(NSString*)username AndPassword:(NSString*)password
 {
     NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/login/%%7Bid%%7D/begin?id=%@&secretKey=%@&userOrEmail=%@&password=%@&minutes=120",self.appID, self.secretKey, username, password];
@@ -32,6 +44,7 @@
     return @"";
 }
 
+// get the current user's trip data
 -(NSMutableDictionary*)getTripData
 {
     NSData *returnData = [self getWithController:@"trips" andID:nil andAction:nil andKey:nil andPageSize:@"1000"];
@@ -42,6 +55,7 @@
     return responseData;
 }
 
+// get the event data for a specific trip ID
 -(NSMutableDictionary*)getEventDataForTripWithTripID:(NSString*)tripID
 {
     //TODO pagesize should be a variable
@@ -54,7 +68,7 @@
     return responseData;
 }
 
-
+// get the current user's user data
 -(NSMutableDictionary*)getUserData
 {
     //TODO pagesize should be variable
@@ -66,6 +80,7 @@
     return responseData;
 }
 
+// get the current user's registered devices
 -(NSMutableDictionary*)getDevices
 {
      //TODO pagesize should be variable
@@ -77,6 +92,7 @@
      return responseData;
 }
 
+// check if there is currently a user logged in
 -(BOOL)isUserLoggedIn{
     //if you can get the user data with the current API, the user is logged in
     if ([[self getUserData] objectForKey:@"Data"]) {
@@ -85,6 +101,7 @@
     return false;
 }
 
+// store Mojio key value pair to server
 -(BOOL)storeMojioWithDeviceID:(NSString*)deviceID andKey:(NSString*)key andValue:(NSDictionary*)data{
     // store a key value pair for a device
     // use getStoredMojioWithDeviceID with the deviceID key to grab the value
@@ -92,6 +109,7 @@
     return status;
 }
 
+// get Mojio key value pair from server
 -(NSString*)getStoredMojioWithDeviceID:(NSString*)deviceID andKey:(NSString*)key{
     NSData *returnData = [self getWithController:@"mojios" andID:deviceID andAction:@"store" andKey:@"deviceData" andPageSize:nil];
         
@@ -99,6 +117,7 @@
     return value;
 }
 
+// delete Mojio key value pair from server
 -(BOOL)deleteStoredMojioWithDeviceID:(NSString*)deviceID andKey:(NSString*)key{
     if (self.apiToken) {
         NSString *str = [NSString stringWithFormat:@"http://sandbox.developer.moj.io/v1/mojios/%@/store/%@",deviceID, key];
@@ -135,18 +154,7 @@
 }
 
 
-// initialize all static variables
--(void)initialize{
-// initialize all necessary variables
-    
-    self.Mojio = @"http://sandbox.developer.moj.io/v1";
-    self.appID = @"87708830-31B7-464F-85D3-9E8FD22A2A10";
-    self.secretKey = @"c861e8a6-e230-4bd4-9c7c-241144071254";
-    self.minutes = @"120"; // int32
-    
-}
-
-// get the request url from the controller (e.g. mojios, apps, login), id, action and key
+// get the mojio request url from the controller (e.g. mojios, apps, login), id, action and key
 -(NSString*) getURLWithController:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key {
     
     NSMutableString * url = [[NSMutableString alloc] init];
@@ -193,6 +201,7 @@
     return url;
 }
 
+// generic method to send all Mojio requests with the correct headers and data
 -(NSData*)sendRequestWithURL:(NSString*)url andData:(NSString*) data andMethod:(NSString*) method andPageSize:(NSString*) pageSize{
     if (self.apiToken) {
     
@@ -203,12 +212,7 @@
             NSMutableString * newUrl = [[NSMutableString alloc] init];
             [newUrl appendString:(url)];
             [newUrl appendString:@"/"];
-            // put page limit, desc and page size here
-            //NSString *datatest = [[NSString alloc] init ];
             [newUrl appendString:[NSString stringWithFormat:@"?pageSize=%@",pageSize]];
-            //NSMutableData *bodyData = [NSMutableData data];
-            //[bodyData appendData:[datatest dataUsingEncoding:NSUTF8StringEncoding]];
-            //[request setHTTPBody: bodyData];
             url = [NSString stringWithString:newUrl];
         }
 
@@ -251,10 +255,11 @@
         
         NSString *escaped = [[jsonString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""]stringByReplacingOccurrencesOfString:@"\n" withString:@"\\\\n"];
         
-        return escaped;
+        return jsonString;
     }
 }
 
+// GET request
 -(NSData*)getWithController:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andPageSize:(NSString*)pageSize{
     if (self.apiToken) {
         
@@ -269,6 +274,7 @@
     }
 }
 
+// PUT request
 -(BOOL)putWithController:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andData:(NSDictionary*)data {
     if (self.apiToken) {
         NSData *returnData = [self sendRequestWithURL:[self getURLWithController:controller andID:ID andAction:action andKey:key] andData:[self dataByMethodDictWithDict:data andMethod:@"PUT"] andMethod:@"PUT" andPageSize:nil];
@@ -289,5 +295,29 @@
         return false;
     }
 
+}
+
+// POST request
+-(BOOL)postWithController:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andData:(NSDictionary*)data {
+    if (self.apiToken) {
+
+        NSData *returnData = [self sendRequestWithURL:[self getURLWithController:controller andID:ID andAction:action andKey:key] andData:[self dataByMethodDictWithDict:data andMethod:@"POST"] andMethod:@"POST" andPageSize:nil];
+        
+        NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+        
+        // if no response text is given, the put was successful
+        if (returnString.length == 0) {
+            return true;
+        } else {
+            return false;
+            NSLog(@"%@", returnString);
+        }
+    }
+    else
+    {
+        NSLog(@"No user data received");
+        return false;
+    }
+    
 }
 @end
