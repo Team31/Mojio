@@ -5,6 +5,7 @@ Feature:
 
 Scenario: 
   Attempt to login the app using valid user/pass. 
+Given I reset the simulator 
 Given I launch the app
 When I touch the button marked "Login"
 Then I wait to see a navigation bar titled "Login"
@@ -13,6 +14,7 @@ When I type "Teamthirty1" into the "PasswordTextField" text field
 When I wait for 1 second
 When I touch the button marked "Login"
 Then I wait to not see a navigation bar titled "Login"
+Then I touch2 "LogOut"
 
 Scenario: 
    Attempt to login the app using invalid user/pass. 

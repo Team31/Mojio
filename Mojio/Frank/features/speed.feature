@@ -5,6 +5,7 @@ Feature:
 
 Scenario: 
   Attempt to modify the speed limit of the device and back. 
+Given I reset the simulator
 Given I launch the app
 When I touch the button marked "Login"
 Then I wait to see a navigation bar titled "Login"
