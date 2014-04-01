@@ -231,7 +231,7 @@ Device* currentDevice;
     //alert user of speeding
     if ([self hasSpeedingOcurred]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Speeding Alert"
-                                                        message:@"Speeding has ocurred"
+                                                        message:@"Speeding has occurred"
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
