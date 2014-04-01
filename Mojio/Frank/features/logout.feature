@@ -11,9 +11,12 @@ When I touch the button marked "Login"
 Then I wait to see a navigation bar titled "Login"
 When I type "team31" into the "UsernameTextField" text field
 When I type "Teamthirty1" into the "PasswordTextField" text field
-When I wait for 1 second
+When I wait for 5 second
 When I touch the button marked "Login"
+When I wait for 5 second
 Then I wait to not see a navigation bar titled "Login"
+When I wait for 5 second
 Then I touch2 "LogOut"
+When I wait for 5 second
 Then I wait to not see a navigation bar titled "Login"
 
